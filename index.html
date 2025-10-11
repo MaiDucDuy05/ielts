@@ -35,7 +35,6 @@
                     <ul class="nav-menu">
                         <li><a href="/">Trang chủ</a></li>
                         <li><a href="/about">Về chúng tôi</a></li>
-                        <li><a href="/about">Phương pháp</a></li>
                         <li><a href="/courses">Khóa học</a></li>
                         <li><a href="/teachers">Giảng viên</a></li>
                         <li><a href="/about">Thành tích</a></li>
@@ -56,20 +55,20 @@
             </div>
         </div>
         
-        <div class="container">
+        <div style="padding: 20px;">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-title"></h1>
                     <p class="hero-subtitle"></p>
                     <p class="hero-description"></p>
                     <div class="hero-buttons">
-                        <a href="/contact" class="btn btn-primary btn-large">
+                        <a href="/#contact" class="btn btn-primary btn-large">
                             <span>ĐĂNG KÝ HỌC THỬ MIỄN PHÍ</span>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <a href="#deals-hero-section" class="btn btn-outline">XEM ƯU ĐÃI</a>
+                        <a href="https://mindup-vn.vercel.app/promotions" class="btn btn-outline">XEM ƯU ĐÃI</a>
                     </div>
                 </div>
                 
@@ -79,6 +78,8 @@
                         <div class="mascot-glow"></div>
                     </div>
                 </div>
+
+                <div class="hero-form"></div>
             </div>
         </div>
         
@@ -109,30 +110,58 @@
                         <span class="badge-text">Năm kinh nghiệm</span>
                     </div>
                 </div>
-                
+
                 <div class="about-text">
                     <p class="about-intro">
                     </p>
                     <div class="about-features"></div>
                 </div>
             </div>
+
+            <div class="section-actions text-center">
+
+            </div>
+
         </div>
     </section>
 
    
-    <section id="method" class="method-section">
+   
+
+    <section id="promotions-section" style="padding: 0;">
+    </section>
+
+    <section id="courses" class="courses-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Phương pháp</span>
-                <h2 class="section-title">PHƯƠNG PHÁP HỌC TẬP</h2>
-                <p class="section-subtitle">
-                    Hệ thống học tập 4 bước giúp học viên tiến bộ nhanh chóng và bền vững
+                <span class="section-label">Khóa học</span>
+                <h2 class="section-title" style="color: white;">CÁC KHÓA HỌC CHÍNH TẠI MINDUP</h2>
+                <p class="section-subtitle" style="color: white;">
+                    Chương trình học đa dạng, phù hợp với mọi trình độ từ cơ bản đến nâng cao
                 </p>
             </div>
             
-            <div class="method-steps"></div>
+            <div class="courses-grid"></div>
+
+            <div class="section-actions">
+            </div>
         </div>
     </section>
+
+
+    <!-- <section id="method" class="method-section">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-label">Phương pháp</span>
+                        <h2 class="section-title">PHƯƠNG PHÁP HỌC TẬP</h2>
+                        <p class="section-subtitle">
+                            Hệ thống học tập 4 bước giúp học viên tiến bộ nhanh chóng và bền vững
+                        </p>
+                    </div>
+                    
+                    <div class="method-steps"></div>
+                </div>
+            </section> -->
 
     <section id="teachers" class="teachers-section">
             <div class="container">
@@ -145,23 +174,13 @@
                 </div>
                 
                 <div class="teachers-grid"></div>
+
+                <div class="section-actions">
+                </div>
             </div>
         </section>
   
-    <section id="courses" class="courses-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Khóa học</span>
-                <h2 class="section-title" style="color: white;">CÁC KHÓA HỌC CHÍNH TẠI MINDUP</h2>
-                <p class="section-subtitle" style="color: white;">
-                    Chương trình học đa dạng, phù hợp với mọi trình độ từ cơ bản đến nâng cao
-                </p>
-            </div>
-            
-            <div class="courses-grid"></div>
-        </div>
-    </section>
-
+    
    
 
   
@@ -176,6 +195,9 @@
             </div>
             
             <div class="achievements-grid"></div>
+
+            <div class="section-actions text-center">
+            </div>
         </div>
     </section>
 
@@ -229,13 +251,13 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="level">Trình độ hiện tại</label>
+                            <label for="level">Khoá học</label>
                             <select id="level" name="level">
-                                <option value="">Chọn trình độ</option>
-                                <option value="beginner">Mất gốc</option>
-                                <option value="elementary">Cơ bản (A1-A2)</option>
-                                <option value="intermediate">Trung cấp (B1-B2)</option>
-                                <option value="advanced">Nâng cao (C1-C2)</option>
+                                <option value="">Chọn Khoá Học</option>
+                                <option value="FOUNDATION BREAKTHROUGH">FOUNDATION BREAKTHROUGH</option>
+                                <option value="ACCELERATOR">IELTS ACCELERATOR</option>
+                                <option value="MASTER">IELTS MASTER</option>
+                                <option value="EXPERT">IELTS EXPERT</option>
                             </select>
                         </div>
                         
@@ -267,7 +289,7 @@
                 <div class="footer-content">
                     <div class="footer-col footer-about">
                         <div class="footer-logo">
-<img src="/public/logo/logo2.png" alt="MindUp Logo">
+                    <img src="/public/logo/logo2.png" alt="MindUp Logo">
                         </div>
                         <p class="footer-description">
                             Trung tâm Anh ngữ MindUp - Nơi khơi dậy tiềm năng và đam mê học tập tiếng Anh

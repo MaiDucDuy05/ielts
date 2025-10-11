@@ -52,6 +52,46 @@ function renderHero(heroData) {
   btnOutline.textContent = heroData.buttonOutline
 
 
+  // Render Hero Form
+  const heroForm = document.querySelector(".hero-form")
+  if (heroData.form) {
+    heroForm.innerHTML = `
+      <form id="heroForm" class="hero-contact-form">
+        <h3>${heroData.form.title}</h3>
+        <p>${heroData.form.subtitle}</p>
+        <div class="form-group">
+          <label for="hero-name">${heroData.form.fields.name.label} ${heroData.form.fields.name.required ? '<span class="required">*</span>' : ''}</label>
+          <input type="text" id="hero-name" name="name" placeholder="${heroData.form.fields.name.placeholder}" ${heroData.form.fields.name.required ? 'required' : ''}>
+        </div>
+        <div class="form-group">
+          <label for="hero-phone">${heroData.form.fields.phone.label} ${heroData.form.fields.phone.required ? '<span class="required">*</span>' : ''}</label>
+          <input type="tel" id="hero-phone" name="phone" placeholder="${heroData.form.fields.phone.placeholder}" ${heroData.form.fields.phone.required ? 'required' : ''}>
+        </div>
+        <div class="form-group">
+          <label for="hero-email">${heroData.form.fields.email.label}</label>
+          <input type="email" id="hero-email" name="email" placeholder="${heroData.form.fields.email.placeholder}">
+        </div>
+        <div class="form-group">
+          <label for="hero-level">${heroData.form.fields.level.label}</label>
+          <select id="hero-level" name="level">
+            ${heroData.form.fields.level.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="hero-message">${heroData.form.fields.message.label}</label>
+          <textarea id="hero-message" name="message" rows="3" placeholder="${heroData.form.fields.message.placeholder}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large btn-block">
+          <span>${heroData.form.submitText}</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <p class="form-note">${heroData.form.note}</p>
+      </form>
+    `
+  }
+
   // Stats Bar
   const statsGrid = document.querySelector(".stats-grid")
   statsGrid.innerHTML = ""
@@ -81,6 +121,8 @@ function renderAbout(aboutData) {
   const sectionSubtitle = document.querySelector("#about .section-subtitle")
   sectionSubtitle.textContent = aboutData.subtitle
 
+  const aboutIntro = document.querySelector(".about-intro")
+  aboutIntro.textContent = aboutData.intro
 
   // Update image if provided
   if (aboutData.image) {
@@ -121,36 +163,6 @@ function renderAbout(aboutData) {
   badgeText.textContent = aboutData.badge.text
 }
 
-// Render Method Section
-function renderMethod(methodData) {
-  const sectionLabel = document.querySelector("#method .section-label")
-  sectionLabel.textContent = methodData.label
-
-  const sectionTitle = document.querySelector("#method .section-title")
-  sectionTitle.textContent = methodData.title
-
-  const sectionSubtitle = document.querySelector("#method .section-subtitle")
-  sectionSubtitle.textContent = methodData.subtitle
-
-  const methodSteps = document.querySelector(".method-steps")
-  methodSteps.innerHTML = ""
-  methodData.steps.forEach((step) => {
-    const stepDiv = createElement("div", { classes: ["method-step"] })
-    const stepNumber = createElement("div", { classes: ["step-number"], text: step.number })
-    const stepContent = createElement("div", { classes: ["step-content"] })
-    const stepTitle = createElement("h3", { text: step.title })
-    const stepDesc = createElement("p", { text: step.description })
-    const stepIcon = createElement("div", { classes: ["step-icon"] })
-
-
-    stepContent.appendChild(stepTitle)
-    stepContent.appendChild(stepDesc)
-    stepDiv.appendChild(stepNumber)
-    stepDiv.appendChild(stepContent)
-    stepDiv.appendChild(stepIcon)
-    methodSteps.appendChild(stepDiv)
-  })
-}
 
 
 // Render Courses Section
@@ -261,15 +273,6 @@ function renderTeachers(teachersData) {
       const img = createElement("img", { attrs: { src: teacher.image, alt: teacher.name } })
       teacherImage.appendChild(img)
     }
-
-    // Create badge
-    const badgeDiv = createElement("div", { classes: ["teacher-badge"] })
-    const badgeScore = createElement("span", { classes: ["badge-score"], text: teacher.score })
-    const badgeLabel = createElement("span", { classes: ["badge-label"], text: "IELTS" })
-    badgeDiv.appendChild(badgeScore)
-    badgeDiv.appendChild(badgeLabel)
-
-    teacherImage.appendChild(badgeDiv)
 
     const teacherInfo = createElement("div", { classes: ["teacher-info"] })
     const nameH3 = createElement("h3", { classes: ["teacher-name"], text: teacher.name })
@@ -464,7 +467,7 @@ function renderDealsHero(dealsData) {
 
 // Render Deals Middle Section
 function renderDealsMiddle(dealsData) {
-  const methodSection = document.querySelector("#method")
+  const methodSection = document.querySelector("#promotions-section")
   const dealsMiddleSection = createElement("section", { classes: ["deals-middle-section"] })
   dealsMiddleSection.innerHTML = `
     <div class="container">
@@ -573,9 +576,9 @@ function renderAll() {
   }
   renderNav(window.data.nav)
   renderHero(window.data.hero)
-  renderDealsHero(window.data.deals)
+  // renderDealsHero(window.data.deals)
   renderAbout(window.data.about)
-  renderMethod(window.data.method)
+  // renderMethod(window.data.method)
   renderDealsMiddle(window.data.deals)
   renderCourses(window.data.courses)
   renderTeachers(window.data.teachers)

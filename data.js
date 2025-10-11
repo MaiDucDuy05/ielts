@@ -9,6 +9,19 @@ const data = {
     buttonOutline: "XEM ƯU ĐÃI",
     stats: [
     ],
+    form: {
+      title: "Đăng ký tư vấn miễn phí",
+      subtitle: "Nhận lộ trình học tập cá nhân hóa",
+      fields: {
+        name: { label: "Họ và tên", placeholder: "Nhập họ và tên", required: true },
+        phone: { label: "Số điện thoại", placeholder: "Nhập số điện thoại", required: true },
+        email: { label: "Email", placeholder: "Nhập địa chỉ email" },
+        level: { label: "Khoá học", options: ["Khoá học", "FOUNDATION BREAKTHROUGH", "IELTS ACCELERATOR", "IELTS MASTER", "IELTS EXPERT"] },
+        message: { label: "Ghi chú", placeholder: "Nhập ghi chú (nếu có)" }
+      },
+      submitText: "ĐĂNG KÝ NGAY",
+      note: "* Thông tin của bạn sẽ được bảo mật tuyệt đối"
+    }
   },
 
   // About Section
@@ -17,7 +30,7 @@ const data = {
     title: "Về chúng tôi",
     subtitle: "MindUp - Nơi khơi dậy tiềm năng và đam mê học tập tiếng Anh",
     intro:
-      "",
+      "MindUp được thành lập với sứ mệnh mang đến trải nghiệm học tập tiếng Anh hiện đại và hiệu quả nhất cho người Việt Nam. Với đội ngũ giảng viên giàu kinh nghiệm, phương pháp giảng dạy khoa học và cam kết đầu ra rõ ràng, chúng tôi đã giúp hàng nghìn học viên chinh phục mục tiêu IELTS và tự tin sử dụng tiếng Anh trong cuộc sống.",
     image: "/public/classroom/6.jpg",
     features: [
       {
@@ -37,33 +50,6 @@ const data = {
   },
 
   // Method Section
-  method: {
-    label: "Phương pháp",
-    title: "PHƯƠNG PHÁP HỌC TẬP",
-    subtitle: "Hệ thống học tập 4 bước giúp học viên tiến bộ nhanh chóng và bền vững",
-    steps: [
-      {
-        number: "01",
-        title: "Đánh giá đầu vào",
-        description: "Kiểm tra trình độ chi tiết để xác định điểm mạnh, điểm yếu và xây dựng lộ trình phù hợp",
-      },
-      {
-        number: "02",
-        title: "Học tập có chính phương",
-        description: "Áp dụng phương pháp giảng dạy hiện đại, kết hợp công nghệ và tương tác thực tế",
-      },
-      {
-        number: "03",
-        title: "Thực hành chuyên sâu",
-        description: "Luyện tập 4 kỹ năng với bài tập đa dạng, mô phỏng thi thật và feedback chi tiết",
-      },
-      {
-        number: "04",
-        title: "Đánh giá & cải thiện",
-        description: "Kiểm tra định kỳ, theo dõi tiến độ và điều chỉnh phương pháp học phù hợp",
-      },
-    ],
-  },
 
   // Reasons Section
   reasons: {
@@ -483,7 +469,6 @@ const data = {
     menu: [
       { text: "Trang chủ", href: "#home" },
       { text: "Về chúng tôi", href: "#about" },
-      { text: "Phương pháp", href: "#method" },
       { text: "Khóa học", href: "#courses" },
       { text: "Giảng viên", href: "#teachers" },
       { text: "Thành tích", href: "#achievements" },

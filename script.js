@@ -95,6 +95,36 @@ if (contactForm) {
   })
 }
 
+// Hero Form Submission
+const heroForm = document.getElementById("heroForm")
+if (heroForm) {
+  heroForm.addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(heroForm)
+    const data = Object.fromEntries(formData)
+
+    // Basic validation
+    if (!data.name || !data.phone) {
+      alert("Vui lòng điền đầy đủ thông tin bắt buộc!")
+      return
+    }
+
+    // Phone validation
+    const phoneRegex = /^[0-9]{10}$/
+    if (!phoneRegex.test(data.phone.replace(/[-\s]/g, ""))) {
+      alert("Số điện thoại không hợp lệ!")
+      return
+    }
+
+    console.log("Hero form submitted:", data)
+
+    // Show success message
+    alert("Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.")
+    heroForm.reset()
+  })
+}
+
 // Smooth Scroll for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
