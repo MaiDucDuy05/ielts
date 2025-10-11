@@ -185,3 +185,62 @@ window.addEventListener("scroll", () => {
 
   lastScroll = currentScroll
 })
+// Promotional Deals Modal
+const dealsModal = document.getElementById('dealsModal')
+const dealsBtn = document.getElementById('dealsBtn')
+const dealsClose = document.getElementById('dealsClose')
+const dealsOverlay = document.querySelector('.deals-overlay')
+const dealsGrid = document.getElementById('dealsGrid')
+
+// Open modal
+dealsBtn.addEventListener('click', () => {
+  populateDeals()
+  dealsModal.classList.add('active')
+  body.style.overflow = 'hidden'
+})
+
+// Close modal
+dealsClose.addEventListener('click', () => {
+  dealsModal.classList.remove('active')
+  body.style.overflow = ''
+})
+
+dealsOverlay.addEventListener('click', () => {
+  dealsModal.classList.remove('active')
+  body.style.overflow = ''
+})
+
+// Populate deals
+function populateDeals() {
+  dealsGrid.innerHTML = ''
+  data.deals.forEach(deal => {
+    const dealCard = document.createElement('div')
+    dealCard.className = 'deal-card'
+    dealCard.innerHTML = `
+      <div class="deal-image">
+        <img src="${deal.image}" alt="${deal.title}">
+        <div class="deal-badge">${deal.badge}</div>
+      </div>
+      <div class="deal-info">
+        <h4 class="deal-title">${deal.title}</h4>
+        <div class="deal-prices">
+          <span class="deal-price-original">${deal.originalPrice}</span>
+          <span class="deal-price-discounted">${deal.discountedPrice}</span>
+          <span class="deal-discount">${deal.discount}</span>
+        </div>
+        <p class="deal-description">${deal.description}</p>
+        <ul class="deal-features">
+          ${deal.features.map(feature => `
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+              </svg>
+              ${feature}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `
+    dealsGrid.appendChild(dealCard)
+  })
+}

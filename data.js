@@ -6,12 +6,8 @@ const data = {
     subtitle: "Học nhanh – Nhớ lâu – Tự tin bứt phá.",
     description: "Phương pháp ghi nhớ kết hợp độc quyền, biến tiếng Anh thành trải nghiệm sáng tạo và đầy cảm hứng",
     buttonPrimary: "ĐĂNG KÝ HỌC THỬ MIỄN PHÍ",
-    // buttonOutline: "Tìm hiểu thêm",
+    buttonOutline: "XEM ƯU ĐÃI",
     stats: [
-      // { icon: "🎯", number: "10+", label: "Ấn xuất sắc đạt IELTS 8.0+" },
-      // { icon: "🏆", number: "4+", label: "Ấn bạch kim" },
-      // { icon: "👨‍🎓", number: "500+", label: "Học viên tin tưởng" },
-      // { icon: "⭐", number: "98%", label: "Học viên hài lòng" }
     ],
   },
 
@@ -21,8 +17,8 @@ const data = {
     title: "Về chúng tôi",
     subtitle: "MindUp - Nơi khơi dậy tiềm năng và đam mê học tập tiếng Anh",
     intro:
-      "MindUp là trung tâm Anh ngữ hàng đầu với sứ mệnh mang đến phương pháp học tập hiện đại, khoa học và hiệu quả nhất cho học viên Việt Nam.",
-    image: "/public/classroom/5.png",
+      "",
+    image: "/public/classroom/6.jpg",
     features: [
       {
         title: "Phương pháp học tập khoa học",
@@ -123,9 +119,9 @@ const data = {
         schedule: "3 buổi/tuần",
         price: "4.000.000đ",
         originalPrice: "5.500.000đ",
-        image: "/public/public/courses/1.png",
+        image: "/public/courses/1.png",
         color: "bg-green-50",
-        logo: "/public/public/courses/logo1.png",
+        logo: "/public/courses/logo1.png",
         objective: "Dành cho bạn bắt đầu từ con số 0, học mãi không nhớ, mất phương hướng.",
         outcome: [
           "Nắm vững nền tảng ngữ pháp và từ vựng cốt lõi",
@@ -150,9 +146,9 @@ const data = {
         schedule: "3 buổi/tuần",
         price: "5.000.000đ",
         originalPrice: "6.500.000đ",
-        image: "/public/public/courses/2.png",
+        image: "/public/courses/2.png",
         color: "bg-blue-50",
-        logo: "/public/public/courses/logo2.png",
+        logo: "/public/courses/logo2.png",
         objective: "Đã có nền tảng cơ bản, muốn chinh phục mục tiêu IELTS để đi làm, du học.",
         outcome: ["Đạt band điểm 4.5 - 5.5+", "Làm chủ kỹ năng Nghe - Nói cơ bản"],
         target: "Học viên có nền tảng, mục tiêu 4.5-5.5 IELTS",
@@ -173,9 +169,9 @@ const data = {
         schedule: "3 buổi/tuần",
         price: "5.500.000đ",
         originalPrice: "7.000.000đ",
-        image: "/public/public/courses/3.png",
+        image: "/public/courses/3.png",
         color: "bg-purple-50",
-        logo: "/public/public/courses/logo3.png",
+        logo: "/public/courses/logo3.png",
         objective: "Đã có band 4.5-5.0, muốn chinh phục 6.0-6.5+ để xét tuyển Đại học, săn học bổng.",
         outcome: ["Đạt band điểm 6.0 - 6.5+", "Tự tin giao tiếp và thảo luận các chủ đề học thuật"],
         target: "Học viên band 4.5-5.0, mục tiêu 6.0-6.5+",
@@ -196,9 +192,9 @@ const data = {
         schedule: "3 buổi/tuần",
         price: "6.000.000đ",
         originalPrice: "8.000.000đ",
-        image: "/public/public/courses/4.png",
+        image: "/public/courses/4.png",
         color: "bg-orange-50",
-        logo: "/public/public/courses/logo3.png",
+        logo: "/public/courses/logo3.png",
         objective: "Đã có nền tảng 6.0-6.5, mục tiêu săn học bổng lớn, định cư hoặc làm việc tại môi trường quốc tế.",
         outcome: ["Chinh phục band 7.0+", "Hoàn thiện kỹ năng học thuật ở cấp độ cao"],
         target: "Học viên band 6.0-6.5, mục tiêu 7.0+",
@@ -424,6 +420,62 @@ const data = {
       courses: ["Foundation", "Intermediate", "Advanced", "VIP 1-1", "Luyện thi IELTS"],
     },
     copyright: "&copy; 2025 MindUp. All rights reserved.",
+  },
+
+  // Deals Sections
+  deals: {
+    hero: {
+      title: "🔥 Ưu Đãi Đặc Biệt - Tiết Kiệm Lên Đến 50%!",
+      subtitle: "Đừng bỏ lỡ cơ hội học IELTS với giá siêu hời. Chương trình ưu đãi có hạn!",
+      features: [
+        "Giảm giá lên đến 50% cho các học viên đăng ký đầu tiên",
+        "Tặng kèm tài liệu học tập độc quyền",
+        "Hỗ trợ học phí trả góp 0%",
+        "Đăng ký ngay nhận ưu đãi đặc biệt"
+      ],
+      cta: "Đăng Ký Ưu Đãi Ngay",
+      image: "/public/courses/1.png",
+      badge: "HOT DEAL"
+    },
+    middle: {
+      title: "Khóa Học Được Ưa Chuộng Nhất",
+      subtitle: "Hàng nghìn học viên đã thành công với chương trình học của chúng tôi",
+      deals: [
+        {
+          title: "FOUNDATION BREAKTHROUGH",
+          originalPrice: "5.500.000đ",
+          discountedPrice: "4.000.000đ",
+          discount: "27%",
+          description: "Khóa nền tảng cho người mới bắt đầu, phá đảo mất gốc",
+          image: "/public/courses/1.png",
+          cta: "Đăng Ký Ngay"
+        },
+        {
+          title: "IELTS ACCELERATOR",
+          originalPrice: "6.500.000đ",
+          discountedPrice: "5.000.000đ",
+          discount: "23%",
+          description: "Tăng tốc band điểm từ 4.5 lên 5.5+ chỉ trong 3 tháng",
+          image: "/public/courses/2.png",
+          cta: "Đăng Ký Ngay"
+        },
+        {
+          title: "IELTS MASTER",
+          originalPrice: "7.000.000đ",
+          discountedPrice: "5.500.000đ",
+          discount: "21%",
+          description: "Bứt phá lên 6.0-6.5+ để xét tuyển đại học và học bổng",
+          image: "/public/courses/3.png",
+          cta: "Đăng Ký Ngay"
+        }
+      ]
+    },
+    footer: {
+      title: "⏰ Ưu Đãi Có Hạn - Đừng Bỏ Lỡ!",
+      subtitle: "Chương trình ưu đãi đặc biệt sẽ kết thúc trong:",
+      cta: "Đăng Ký Ngay Trước Khi Quá Muộn",
+      image: "/public/courses/4.png"
+    }
   },
 
   // Navigation

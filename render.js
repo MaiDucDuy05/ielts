@@ -51,6 +51,7 @@ function renderHero(heroData) {
   const btnOutline = document.querySelector(".hero-buttons .btn-outline")
   btnOutline.textContent = heroData.buttonOutline
 
+
   // Stats Bar
   const statsGrid = document.querySelector(".stats-grid")
   statsGrid.innerHTML = ""
@@ -80,8 +81,6 @@ function renderAbout(aboutData) {
   const sectionSubtitle = document.querySelector("#about .section-subtitle")
   sectionSubtitle.textContent = aboutData.subtitle
 
-  const aboutIntro = document.querySelector(".about-intro")
-  aboutIntro.innerHTML = `<strong>MindUp</strong> ${aboutData.intro}`
 
   // Update image if provided
   if (aboutData.image) {
@@ -143,23 +142,6 @@ function renderMethod(methodData) {
     const stepDesc = createElement("p", { text: step.description })
     const stepIcon = createElement("div", { classes: ["step-icon"] })
 
-    // Use emoji from original HTML for icons
-    // switch (step.number) {
-    //   case "01":
-    //     stepIcon.textContent = "📋"
-    //     break
-    //   case "02":
-    //     stepIcon.textContent = "📚"
-    //     break
-    //   case "03":
-    //     stepIcon.textContent = "✍️"
-    //     break
-    //   case "04":
-    //     stepIcon.textContent = "📈"
-    //     break
-    //   default:
-    //     stepIcon.textContent = ""
-    // }
 
     stepContent.appendChild(stepTitle)
     stepContent.appendChild(stepDesc)
@@ -170,30 +152,6 @@ function renderMethod(methodData) {
   })
 }
 
-// Render Reasons Section
-function renderReasons(reasonsData) {
-  const sectionLabel = document.querySelector("#reasons .section-label")
-  sectionLabel.textContent = reasonsData.label
-
-  const sectionTitle = document.querySelector("#reasons .section-title")
-  sectionTitle.textContent = reasonsData.title
-
-  const reasonsGrid = document.querySelector(".reasons-grid")
-  reasonsGrid.innerHTML = ""
-  reasonsData.cards.forEach((card) => {
-    const cardDiv = createElement("div", { classes: ["reason-card"] })
-    const numberDiv = createElement("div", { classes: ["reason-number"], text: card.number })
-    const iconDiv = createElement("div", { classes: ["reason-icon"], text: card.icon })
-    const titleH3 = createElement("h3", { text: card.title })
-    const descP = createElement("p", { text: card.description })
-
-    cardDiv.appendChild(numberDiv)
-    cardDiv.appendChild(iconDiv)
-    cardDiv.appendChild(titleH3)
-    cardDiv.appendChild(descP)
-    reasonsGrid.appendChild(cardDiv)
-  })
-}
 
 // Render Courses Section
 function renderCourses(coursesData) {
@@ -467,7 +425,144 @@ function renderContact(contactData) {
   formNote.textContent = contactData.form.note
 }
 
-// Render Footer Section
+// Render Deals Hero Section
+function renderDealsHero(dealsData) {
+  const heroSection = document.querySelector("#home")
+  const dealsHeroSection = createElement("section", { classes: ["deals-hero-section"], attrs: { id: "deals-hero-section" } })
+  dealsHeroSection.innerHTML = `
+    <div class="container">
+      <div class="deals-hero-content">
+        <div class="deals-hero-text">
+          <h2 class="deals-hero-title">${dealsData.hero.title}</h2>
+          <p class="deals-hero-subtitle">${dealsData.hero.subtitle}</p>
+          <div class="deals-hero-features">
+            ${dealsData.hero.features.map(feature => `
+              <div class="deals-hero-feature">
+                <span class="feature-icon">✓</span>
+                <span>${feature}</span>
+              </div>
+            `).join('')}
+          </div>
+          <a href="#contact" class="btn btn-primary btn-large deals-hero-cta">
+            <span>${dealsData.hero.cta}</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="deals-hero-image">
+          <img src="${dealsData.hero.image}" alt="Deals Hero">
+          <div class="deals-hero-badge">
+            <span class="badge-text">${dealsData.hero.badge}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+  heroSection.insertAdjacentElement('afterend', dealsHeroSection)
+}
+
+// Render Deals Middle Section
+function renderDealsMiddle(dealsData) {
+  const methodSection = document.querySelector("#method")
+  const dealsMiddleSection = createElement("section", { classes: ["deals-middle-section"] })
+  dealsMiddleSection.innerHTML = `
+    <div class="container">
+      <div class="deals-middle-header">
+        <h2 class="deals-middle-title">${dealsData.middle.title}</h2>
+        <p class="deals-middle-subtitle">${dealsData.middle.subtitle}</p>
+      </div>
+      <div class="deals-middle-grid">
+        ${dealsData.middle.deals.map(deal => `
+          <div class="deals-middle-card">
+            <div class="deal-image">
+              <img src="${deal.image}" alt="${deal.title}">
+              <div class="deal-discount-badge">-${deal.discount}</div>
+            </div>
+            <div class="deal-info">
+              <h3 class="deal-title">${deal.title}</h3>
+              <div class="deal-prices">
+                <span class="deal-price-original">${deal.originalPrice}</span>
+                <strong class="deal-price-discounted">${deal.discountedPrice}</strong>
+              </div>
+              <p class="deal-description">${deal.description}</p>
+              <button class="btn btn-primary deal-cta" onclick="window.location.href='#contact'">${deal.cta}</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `
+  methodSection.insertAdjacentElement('afterend', dealsMiddleSection)
+}
+
+// Render Deals Footer Section
+function renderDealsFooter(dealsData) {
+  const footerSection = document.querySelector(".site-footer")
+  const dealsFooterSection = createElement("section", { classes: ["deals-footer-section"] })
+  dealsFooterSection.innerHTML = `
+    <div class="container">
+      <div class="deals-footer-content">
+        <div class="deals-footer-text">
+          <h2 class="deals-footer-title">${dealsData.footer.title}</h2>
+          <p class="deals-footer-subtitle">${dealsData.footer.subtitle}</p>
+          <div class="deals-footer-countdown" id="dealsCountdown">
+            <div class="countdown-item">
+              <span class="countdown-number" id="days">00</span>
+              <span class="countdown-label">Ngày</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="hours">00</span>
+              <span class="countdown-label">Giờ</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="minutes">00</span>
+              <span class="countdown-label">Phút</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="seconds">00</span>
+              <span class="countdown-label">Giây</span>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-primary btn-large deals-footer-cta">
+            <span>${dealsData.footer.cta}</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="deals-footer-image">
+          <img src="${dealsData.footer.image}" alt="Deals Footer">
+        </div>
+      </div>
+    </div>
+  `
+  footerSection.insertAdjacentElement('beforebegin', dealsFooterSection)
+}
+
+// Countdown function for footer deals
+function startCountdown(targetDate) {
+  const countdownInterval = setInterval(() => {
+    const now = new Date().getTime()
+    const distance = targetDate - now
+
+    if (distance < 0) {
+      clearInterval(countdownInterval)
+      document.getElementById('dealsCountdown').innerHTML = '<p>Ưu đãi đã kết thúc!</p>'
+      return
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+
+    document.getElementById('days').textContent = days.toString().padStart(2, '0')
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0')
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0')
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0')
+  }, 1000)
+}
 
 
 // Main render function to call all
@@ -478,16 +573,22 @@ function renderAll() {
   }
   renderNav(window.data.nav)
   renderHero(window.data.hero)
+  renderDealsHero(window.data.deals)
   renderAbout(window.data.about)
   renderMethod(window.data.method)
-  renderReasons(window.data.reasons)
+  renderDealsMiddle(window.data.deals)
   renderCourses(window.data.courses)
   renderTeachers(window.data.teachers)
   renderAchievements(window.data.achievements)
   renderContact(window.data.contact)
+  renderDealsFooter(window.data.deals)
 }
 
 // Run render on DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   renderAll()
+  // Start countdown for deals footer (set to end in 7 days from now)
+  const targetDate = new Date()
+  targetDate.setDate(targetDate.getDate() + 7)
+  startCountdown(targetDate.getTime())
 })
