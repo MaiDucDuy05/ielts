@@ -53,35 +53,55 @@ const data = {
 
   // Reasons Section
   reasons: {
-    label: "Tại sao chọn chúng tôi",
-    title: "LÝ DO LỰA CHỌN MINDUP",
-    cards: [
-      {
-        number: "01",
-        icon: "",
-        title: "Phương pháp học tập hiệu quả",
-        description: "Kết hợp lý thuyết và thực hành, tập trung vào kỹ năng giao tiếp thực tế",
-      },
-      {
-        number: "02",
-        icon: "",
-        title: "Giảng viên 8.0+ IELTS",
-        description: "Đội ngũ giảng viên giàu kinh nghiệm, tận tâm và nhiệt huyết với nghề",
-      },
-      {
-        number: "03",
-        icon: "",
-        title: "Lộ trình cá nhân hóa",
-        description: "Chương trình học được thiết kế riêng phù hợp với mục tiêu của từng học viên",
-      },
-      {
-        number: "04",
-        icon: "",
-        title: "Cam kết đầu ra",
-        description: "Đảm bảo đạt mục tiêu hoặc học lại miễn phí đến khi đạt kết quả",
-      },
-    ],
-  },
+  label: "Tại sao chọn chúng tôi",
+  title: "LÝ DO LỰA CHỌN MINDUP",
+  cards: [
+    {
+      number: "01",
+      icon: "",
+      title: "Phương pháp học chủ động",
+      description:
+        "Áp dụng mô hình Active Learning, kết hợp linh hoạt giữa lý thuyết – thực hành – phản xạ. Giúp học viên ghi nhớ tự nhiên và sử dụng tiếng Anh thành thạo trong đời sống thực tế.",
+    },
+    {
+      number: "02",
+      icon: "",
+      title: "Giảng viên 8.0+ IELTS",
+      description:
+        "Đội ngũ giảng viên giàu kinh nghiệm, đạt IELTS 8.0+ và từng giảng dạy tại các trung tâm quốc tế. Họ truyền cảm hứng, đồng hành và giúp bạn tiến bộ nhanh chóng.",
+    },
+    {
+      number: "03",
+      icon: "",
+      title: "Lộ trình cá nhân hóa",
+      description:
+        "Mỗi học viên được thiết kế lộ trình riêng phù hợp với mục tiêu, trình độ và thời gian học. Theo dõi tiến độ dễ dàng, học đúng trọng tâm, đạt kết quả nhanh hơn.",
+    },
+    {
+      number: "04",
+      icon: "",
+      title: "Cam kết đầu ra rõ ràng",
+      description:
+        "MindUp đảm bảo học viên đạt mục tiêu đầu ra như cam kết. Nếu chưa đạt, được học lại miễn phí cho đến khi hoàn thành mục tiêu.",
+    },
+    {
+      number: "05",
+      icon: "",
+      title: "Cộng đồng học viên năng động",
+      description:
+        "Tham gia cộng đồng hàng ngàn học viên cùng mục tiêu, được chia sẻ kinh nghiệm, luyện tập giao tiếp và truyền cảm hứng học tập mỗi ngày.",
+    },
+    {
+      number: "06",
+      icon: "",
+      title: "Hỗ trợ 1:1 tận tâm",
+      description:
+        "Đội ngũ tư vấn và giảng viên hỗ trợ 1 kèm 1 trong suốt quá trình học. Luôn sẵn sàng giải đáp, kèm cặp và giúp bạn vượt qua mọi khó khăn.",
+    },
+  ],
+},
+
+
 
   // Courses Section
   courses: {

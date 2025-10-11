@@ -163,6 +163,49 @@ function renderAbout(aboutData) {
   badgeText.textContent = aboutData.badge.text
 }
 
+// Render Reasons Section
+function renderReasons(reasonsData) {
+  const sectionLabel = document.querySelector("#reasons .section-label")
+  sectionLabel.textContent = reasonsData.label
+
+  const sectionTitle = document.querySelector("#reasons .section-title")
+  sectionTitle.textContent = reasonsData.title
+
+  const sectionSubtitle = document.querySelector("#reasons .section-subtitle")
+  sectionSubtitle.textContent = reasonsData.subtitle
+
+  const reasonsGrid = document.querySelector(".reasons-grid")
+  reasonsGrid.innerHTML = ""
+
+  // Define icons for each reason
+  const icons = {
+    "01": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`, // Lightbulb for method
+    "02": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 2l-1 1"/><path d="M22 8l-1-1"/><path d="M16 2l1 1"/><path d="M16 8l1-1"/></svg>`, // Users for teachers
+    "03": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>`, // Home for personalized path
+    "04": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M10 9a3 3 0 1 1 6 0c0 1.66-1.34 3-3 3s-3-1.34-3-3"/><path d="M2 9v1a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V9"/></svg>` // Award for commitment
+  }
+
+  reasonsData.cards.forEach((card, index) => {
+    const cardDiv = createElement("div", { classes: ["reason-card"] })
+    cardDiv.classList.add(`reason-card-${index + 1}`)
+
+    const iconDiv = createElement("div", { classes: ["reason-icon"] })
+    iconDiv.innerHTML = icons[card.number] || icons["01"]
+
+    const numberDiv = createElement("div", { classes: ["reason-number"], text: card.number })
+    const titleH3 = createElement("h3", { classes: ["reason-title"], text: card.title })
+    const descP = createElement("p", { classes: ["reason-description"], text: card.description })
+
+    cardDiv.appendChild(iconDiv)
+    cardDiv.appendChild(numberDiv)
+    cardDiv.appendChild(titleH3)
+    cardDiv.appendChild(descP)
+    reasonsGrid.appendChild(cardDiv)
+  })
+}
+
+
+
 
 
 // Render Courses Section
@@ -576,9 +619,8 @@ function renderAll() {
   }
   renderNav(window.data.nav)
   renderHero(window.data.hero)
-  // renderDealsHero(window.data.deals)
   renderAbout(window.data.about)
-  // renderMethod(window.data.method)
+  renderReasons(window.data.reasons)
   renderDealsMiddle(window.data.deals)
   renderCourses(window.data.courses)
   renderTeachers(window.data.teachers)
