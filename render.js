@@ -50,6 +50,7 @@ function renderHero(heroData) {
 
   const btnOutline = document.querySelector(".hero-buttons .btn-outline")
   btnOutline.textContent = heroData.buttonOutline
+  btnOutline.style.color = "#fff"  
 
 
   // Render Hero Form
@@ -161,6 +162,22 @@ function renderAbout(aboutData) {
   const badgeText = document.querySelector(".about-badge .badge-text")
   badgeNumber.textContent = aboutData.badge.number
   badgeText.textContent = aboutData.badge.text
+
+  // Add " thêm" button in the middle of the footer
+  const aboutSection = document.querySelector("#about .container")
+  const viewMoreBtn = createElement("div", { classes: ["about-view-more"] })
+  const btn = createElement("a", {
+    classes: ["btn", "btn-outline", "btn-large"],
+    attrs: { href: "https://mindup-vn.vercel.app/about" },
+    html: `
+      <span>Xem thêm</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `
+  })
+  viewMoreBtn.appendChild(btn)
+  aboutSection.appendChild(viewMoreBtn)
 }
 
 // Render Reasons Section
@@ -270,17 +287,28 @@ function renderCourses(coursesData) {
     }
 
     const footerDiv = createElement("div", { classes: ["course-footer"] })
-    const btn = createElement("a", {
-      classes: ["btn", "btn-primary", "btn-block"],
+    const btnRegister = createElement("a", {
+      classes: ["btn", "btn-primary"],
       attrs: { href: "#contact" },
     })
-    btn.innerHTML = `
+    btnRegister.innerHTML = `
       <span>Đăng ký ngay</span>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `
-    footerDiv.appendChild(btn)
+    const btnLearnMore = createElement("a", {
+      classes: ["btn", "btn-outline"],
+      attrs: { href: `https://mindup-vn.vercel.app/courses/${index+1}` },
+    })
+    btnLearnMore.innerHTML = `
+      <span>Tìm hiểu thêm</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `
+    footerDiv.appendChild(btnRegister)
+    footerDiv.appendChild(btnLearnMore)
 
     courseCard.appendChild(badgeDiv)
     courseCard.appendChild(levelDiv)
@@ -430,6 +458,7 @@ function renderAchievements(achievementsData) {
     achievementsSection.appendChild(caseStudiesSection)
   }
 
+
 }
 
 // Render Contact Section
@@ -471,42 +500,6 @@ function renderContact(contactData) {
   formNote.textContent = contactData.form.note
 }
 
-// Render Deals Hero Section
-function renderDealsHero(dealsData) {
-  const heroSection = document.querySelector("#home")
-  const dealsHeroSection = createElement("section", { classes: ["deals-hero-section"], attrs: { id: "deals-hero-section" } })
-  dealsHeroSection.innerHTML = `
-    <div class="container">
-      <div class="deals-hero-content">
-        <div class="deals-hero-text">
-          <h2 class="deals-hero-title">${dealsData.hero.title}</h2>
-          <p class="deals-hero-subtitle">${dealsData.hero.subtitle}</p>
-          <div class="deals-hero-features">
-            ${dealsData.hero.features.map(feature => `
-              <div class="deals-hero-feature">
-                <span class="feature-icon">✓</span>
-                <span>${feature}</span>
-              </div>
-            `).join('')}
-          </div>
-          <a href="#contact" class="btn btn-primary btn-large deals-hero-cta">
-            <span>${dealsData.hero.cta}</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="deals-hero-image">
-          <img src="${dealsData.hero.image}" alt="Deals Hero">
-          <div class="deals-hero-badge">
-            <span class="badge-text">${dealsData.hero.badge}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
-  heroSection.insertAdjacentElement('afterend', dealsHeroSection)
-}
 
 // Render Deals Middle Section
 function renderDealsMiddle(dealsData) {
@@ -536,6 +529,15 @@ function renderDealsMiddle(dealsData) {
             </div>
           </div>
         `).join('')}
+
+      </div>
+      <div class="about-view-more">
+        <a href="https://mindup-vn.vercel.app/courses" class="btn btn-outline btn-large">
+          <span>Xem thêm</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
       </div>
     </div>
   `

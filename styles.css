@@ -340,14 +340,12 @@ a {
 
 .btn-outline {
   background: transparent;
-  color: var(--white);
+  color: var(--primary-600);
   border-color: var(--white);
 }
 
-.btn-outline:hover {
-  background: var(--white);
-  color: var(--primary);
-}
+
+
 
 .btn-large {
   padding: 1rem 2rem;
@@ -2848,4 +2846,11 @@ section {
     width: 200px;
     height: 200px;
   }
+}
+
+.about-view-more {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--gray-200);
 }

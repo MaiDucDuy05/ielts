@@ -444,7 +444,7 @@ const data = {
       badge: "HOT DEAL"
     },
     middle: {
-      title: "Khóa Học Được Ưa Chuộng Nhất",
+      title: "Khóa Học Nổi Bật",
       subtitle: "Hàng nghìn học viên đã thành công với chương trình học của chúng tôi",
       deals: [
         {
