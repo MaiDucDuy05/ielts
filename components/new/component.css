@@ -1,0 +1,238 @@
+#new {
+  background-color: #fff3e4;
+  border-radius: 60px;
+  padding: 60px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* ----- Image Section ----- */
+.image-wrapper {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ----- Roadmap Section ----- */
+.roadmap {
+  background: linear-gradient(to bottom, #f3e8ff, #ede9fe);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+}
+
+.roadmap .tag {
+  color: #6b21a8;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.roadmap h3 {
+  color: #1f2937;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.roadmap p {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* ----- Timeline ----- */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #d8b4fe;
+  border-radius: 6px;
+}
+
+.step {
+  position: relative;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.dot {
+  position: absolute;
+  left: -2px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: #7e22ce;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+.step-content {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.step-content:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.step-content h6 {
+  color: #6b21a8;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.step-content p {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.step-content span {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #7e22ce;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.step-content:hover span {
+  color: #5b21b6;
+}
+
+/* ===================
+   📱 Responsive
+=================== */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  #new {
+    padding: 40px 16px;
+    border-radius: 40px;
+  }
+
+  .roadmap {
+    padding: 28px;
+  }
+
+  .roadmap h3 {
+    font-size: 20px;
+  }
+
+  .roadmap p {
+    font-size: 13px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #new {
+    padding: 30px 12px;
+    border-radius: 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .image-wrapper img {
+    width: 85%;
+    max-height: 220px;
+    object-fit: contain;
+  }
+
+  .roadmap {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .roadmap .tag {
+    font-size: 12px;
+  }
+
+  .roadmap h3 {
+    font-size: 18px;
+  }
+
+  .roadmap p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .timeline {
+    padding-left: 22px;
+  }
+
+  .timeline::before {
+    left: 8px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    left: -1px;
+  }
+
+  .step-content {
+    padding: 12px;
+  }
+
+  .step-content h6 {
+    font-size: 12px;
+  }
+
+  .step-content p,
+  .step-content span {
+    font-size: 11px;
+  }
+}

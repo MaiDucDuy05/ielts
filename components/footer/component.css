@@ -1,0 +1,202 @@
+/* ================================== */
+/* Footer */
+/* ================================== */
+
+.site-footer {
+  background: var(--gray-900);
+  color: var(--white);
+  padding-top: var(--spacing-3xl);
+}
+
+/* --- Main Footer Layout --- */
+.footer-content {
+  display: grid;
+  /* Mobile-first: 1 cột (mặc định) */
+  /* Đây là Hàng 1 (cột 1) theo yêu cầu mobile */
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  /* Mobile: Căn giữa */
+  text-align: center;
+}
+
+/* --- Cột đầu tiên (logo + mô tả + social) --- */
+.footer-col-main {
+  display: flex;
+  flex-direction: column;
+  /* Mobile: Căn giữa */
+  align-items: center;
+}
+
+.footer-logo img {
+  height: 50px;
+  width: auto;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-description {
+  color: var(--gray-400);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-lg);
+  max-width: 500px; /* Giới hạn độ rộng cho dễ đọc */
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  /* Mobile: Căn giữa */
+  justify-content: center;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--gray-800);
+  border-radius: 50%;
+  color: var(--gray-400);
+  transition: all var(--transition-base);
+}
+
+.footer-social a:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+/* --- Hàng chứa các cột link (MindUp - Khóa học - Liên hệ) --- */
+.footer-links-row {
+  display: grid;
+  /* Mobile-first: 1 cột (mặc định) */
+  /* Đây là 3 hàng còn lại (cột 2, 3, 4) theo yêu cầu mobile */
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl); /* Tăng gap cho mobile */
+  align-items: start;
+  /* Mobile: Căn giữa */
+  text-align: center;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.footer-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--white);
+}
+
+.footer-links,
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-links a,
+.footer-contact a {
+  color: var(--gray-400);
+  transition: color var(--transition-base);
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: var(--primary);
+}
+
+/* --- Contact --- */
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  /* Mobile: Căn giữa */
+  justify-content: center;
+}
+
+.footer-contact svg {
+  flex-shrink: 0;
+  color: var(--primary);
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Bottom --- */
+.footer-bottom {
+  border-top: 1px solid var(--gray-800);
+  padding: var(--spacing-lg) 0;
+  margin-top: var(--spacing-2xl);
+}
+
+.footer-bottom p {
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 0.875rem;
+}
+
+/* ================================== */
+/* --- Responsive --- */
+/* ================================== */
+
+/* Tablet (768px): 2 cột link + reset căn lề */
+/* (Đây là bước đệm, không có trong yêu cầu nhưng giữ lại cho hợp lý) */
+@media (min-width: 768px) {
+  .footer-content {
+    /* Reset căn lề từ mobile */
+    text-align: left;
+  }
+  
+  .footer-col-main {
+    /* Reset căn lề từ mobile */
+    align-items: flex-start;
+  }
+  
+  .footer-social {
+     /* Reset căn lề từ mobile */
+    justify-content: flex-start;
+  }
+
+  .footer-links-row {
+    /* 2 cột cho các link */
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2xl);
+    /* Reset căn lề từ mobile */
+    text-align: left;
+  }
+
+  .footer-contact li {
+    /* Reset căn lề từ mobile */
+    justify-content: flex-start;
+  }
+}
+
+/* Desktop (1024px): 4 CỘT 1 HÀNG */
+@media (min-width: 1024px) {
+  .footer-content {
+    /* ĐÂY LÀ THAY ĐỔI CHÍNH: 4 cột */
+    /* Cột 1 (logo) rộng hơn 3 cột còn lại */
+    grid-template-columns: 1.5fr 1fr 1fr 1fr; 
+    align-items: start; /* Căn các cột lên trên cùng */
+  }
+
+  .footer-links-row {
+    /* THAY ĐỔI QUAN TRỌNG:
+      'display: contents' làm cho box .footer-links-row "biến mất" 
+      và đẩy 3 cột con của nó lên làm con trực tiếp của .footer-content 
+      để xếp vào 3 cột lưới còn lại.
+    */
+    display: contents;
+  }
+}

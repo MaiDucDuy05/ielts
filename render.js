@@ -20,6 +20,40 @@ function createElement(tag, options = {}) {
   return el
 }
 
+// Function to load component HTML and CSS
+async function loadComponent(componentName) {
+  try {
+    const htmlResponse = await fetch(`components/${componentName}/component.html`)
+    const cssResponse = await fetch(`components/${componentName}/component.css`)
+
+    if (!htmlResponse.ok || !cssResponse.ok) {
+      throw new Error(`Failed to load component: ${componentName}`)
+    }
+
+    const html = await htmlResponse.text()
+    const css = await cssResponse.text()
+
+    // Inject CSS into head
+    const style = document.createElement('style')
+    style.textContent = css
+    document.head.appendChild(style)
+
+    return html
+  } catch (error) {
+    console.error(`Error loading component ${componentName}:`, error)
+    return null
+  }
+}
+
+// Function to render component into container
+function renderComponent(containerId, html) {
+  const container = document.getElementById(containerId)
+  console.log(container)
+  if (container && html) {
+    container.innerHTML = html
+  }
+}
+
 // Render Navigation Menu
 function renderNav(navData) {
   const navMenu = document.querySelector(".nav-menu")
@@ -125,27 +159,85 @@ function renderAbout(aboutData) {
   const aboutIntro = document.querySelector(".about-intro")
   aboutIntro.textContent = aboutData.intro
 
-  // Update image if provided
-  if (aboutData.image) {
-    const aboutImage = document.querySelector(".about-image img")
-    if (aboutImage) {
-      aboutImage.src = aboutData.image
-      aboutImage.alt = "About MindUp"
-    }
+  // Update image
+  const sliderTrack = document.querySelector("#about .about-image-slider");
+  const imageWrapper = document.querySelector("#about .about-image-wrapper");
+
+  if (sliderTrack && imageWrapper) {
+      // Xóa slide cũ (nếu có)
+      sliderTrack.innerHTML = ""; 
+
+      let imageList = [];
+
+      // 2. Kiểm tra xem data có mảng 'images' (mảng object)
+      if (aboutData.images && Array.isArray(aboutData.images)) {
+          imageList = aboutData.images;
+      } 
+      // Fallback: Nếu data chỉ có 1 'image' (string)
+      else if (aboutData.image) { 
+          // Tạo mảng object tương thích
+          imageList = [{ url: aboutData.image, caption: "" }]; 
+      }
+
+      // 3. Tạo các slide item (Image + Caption)
+      if (imageList.length > 0) {
+          imageList.forEach(imageData => {
+              // --- BẮT ĐẦU THAY ĐỔI ---
+
+              // a. Tạo div bọc ngoài cho mỗi slide
+              const slideItem = document.createElement('div');
+              slideItem.className = 'slide-item';
+
+              // b. Tạo thẻ <img>
+              const img = document.createElement('img');
+              img.src = imageData.url; // Lấy từ object
+              img.alt = imageData.caption || "About MindUp Image"; // Dùng caption làm alt
+
+              // c. Tạo thẻ <p> cho tiêu đề (caption)
+              const caption = document.createElement('p');
+              caption.className = 'slide-caption';
+              caption.textContent = imageData.caption || ''; // Lấy từ object
+
+              // d. Gắn img và caption vào div bọc
+              slideItem.appendChild(img);
+              
+              // Chỉ thêm caption nếu nó tồn tại
+              if (imageData.caption) {
+                  slideItem.appendChild(caption);
+              }
+
+              // e. Gắn div bọc vào track
+              sliderTrack.appendChild(slideItem);
+              
+              // --- KẾT THÚC THAY ĐỔI ---
+          });
+      }
+      
+      // 4. Ẩn/hiện nút nav nếu chỉ có 1 ảnh
+      const nav = imageWrapper.querySelector('.slider-nav');
+      if (nav) {
+          nav.style.display = imageList.length > 1 ? 'flex' : 'none';
+      }
   }
 
-  // Features
+  // Features (Cập nhật Icon SVG)
   const featuresContainer = document.querySelector(".about-features")
   featuresContainer.innerHTML = ""
-  aboutData.features.forEach((feature) => {
+  
+  // Icon list cho Features (Dùng icon liên quan đến học tập, chất lượng)
+  const featureIcons = [
+      `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H17v6"/></svg>`, // Khoa học/Phương pháp (Tập trung)
+      `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87m-1-2.07v1.17m-1.5-.78v1.18"/></svg>`, // Giảng viên/Chất lượng (User Check)
+      `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5a5.5 5.5 0 0 0-11 0c0 2.29 1.51 4.04 3 5.5l7 7z"/><line x1="12" y1="12" x2="12" y2="12"/></svg>` // Cam kết/Mục tiêu (Target)
+  ];
+  
+  aboutData.features.forEach((feature, index) => {
     const featureItem = createElement("div", { classes: ["feature-item"] })
     const featureIcon = createElement("div", { classes: ["feature-icon"] })
-    featureIcon.innerHTML = `
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
-        <path d="M12 20L18 26L28 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    `
+    
+    // Gán icon SVG theo thứ tự
+    featureIcon.innerHTML = featureIcons[index % featureIcons.length];
+
     const featureContent = createElement("div", { classes: ["feature-content"] })
     const featureTitle = createElement("h4", { text: feature.title })
     const featureDesc = createElement("p", { text: feature.description })
@@ -157,27 +249,17 @@ function renderAbout(aboutData) {
     featuresContainer.appendChild(featureItem)
   })
 
-  // Badge
-  const badgeNumber = document.querySelector(".about-badge .badge-number")
-  const badgeText = document.querySelector(".about-badge .badge-text")
-  badgeNumber.textContent = aboutData.badge.number
-  badgeText.textContent = aboutData.badge.text
 
-  // Add " thêm" button in the middle of the footer
-  const aboutSection = document.querySelector("#about .container")
-  const viewMoreBtn = createElement("div", { classes: ["about-view-more"] })
-  const btn = createElement("a", {
-    classes: ["btn", "btn-outline", "btn-large"],
-    attrs: { href: "https://mindup-vn.vercel.app/about" },
-    html: `
-      <span>Xem thêm</span>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    `
-  })
-  viewMoreBtn.appendChild(btn)
-  aboutSection.appendChild(viewMoreBtn)
+
+  // NEW: Render MVV Grid
+  const mvvGrid = document.querySelector(".about-mvv-grid")
+  if (mvvGrid) {
+      mvvGrid.querySelector('.mission-card .mvv-description').textContent = aboutData.mission || "Sứ mệnh đang được cập nhật.";
+      mvvGrid.querySelector('.vision-card .mvv-description').textContent = aboutData.vision || "Tầm nhìn đang được cập nhật.";
+      mvvGrid.querySelector('.value-card .mvv-description').textContent = aboutData.coreValues || "Giá trị cốt lõi đang được cập nhật.";
+  }
+
+  initAboutSlider();
 }
 
 // Render Reasons Section
@@ -199,7 +281,9 @@ function renderReasons(reasonsData) {
     "01": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`, // Lightbulb for method
     "02": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 2l-1 1"/><path d="M22 8l-1-1"/><path d="M16 2l1 1"/><path d="M16 8l1-1"/></svg>`, // Users for teachers
     "03": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>`, // Home for personalized path
-    "04": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M10 9a3 3 0 1 1 6 0c0 1.66-1.34 3-3 3s-3-1.34-3-3"/><path d="M2 9v1a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V9"/></svg>` // Award for commitment
+    "04": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M10 9a3 3 0 1 1 6 0c0 1.66-1.34 3-3 3s-3-1.34-3-3"/><path d="M2 9v1a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V9"/></svg>`, // Award for commitment
+    "05": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, // Icon cho "Cộng đồng" (Users)
+    "06": `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
   }
 
   reasonsData.cards.forEach((card, index) => {
@@ -220,9 +304,6 @@ function renderReasons(reasonsData) {
     reasonsGrid.appendChild(cardDiv)
   })
 }
-
-
-
 
 
 // Render Courses Section
@@ -322,48 +403,6 @@ function renderCourses(coursesData) {
   })
 }
 
-// Render Teachers Section
-function renderTeachers(teachersData) {
-  const sectionLabel = document.querySelector("#teachers .section-label")
-  sectionLabel.textContent = teachersData.label
-
-  const sectionTitle = document.querySelector("#teachers .section-title")
-  sectionTitle.textContent = teachersData.title
-
-  const sectionSubtitle = document.querySelector("#teachers .section-subtitle")
-  sectionSubtitle.textContent = teachersData.subtitle
-
-  const teachersGrid = document.querySelector(".teachers-grid")
-  teachersGrid.innerHTML = ""
-  teachersData.list.forEach((teacher) => {
-    const teacherCard = createElement("div", { classes: ["teacher-card"] })
-    const teacherImage = createElement("div", { classes: ["teacher-image"] })
-
-    // Add image if provided
-    if (teacher.image) {
-      const img = createElement("img", { attrs: { src: teacher.image, alt: teacher.name } })
-      teacherImage.appendChild(img)
-    }
-
-    const teacherInfo = createElement("div", { classes: ["teacher-info"] })
-    const nameH3 = createElement("h3", { classes: ["teacher-name"], text: teacher.name })
-    const titleP = createElement("p", { classes: ["teacher-title"], text: teacher.title })
-    const achievementsUl = createElement("ul", { classes: ["teacher-achievements"] })
-    teacher.achievements.forEach((ach) => {
-      const li = createElement("li", { text: ach })
-      achievementsUl.appendChild(li)
-    })
-
-    teacherInfo.appendChild(nameH3)
-    teacherInfo.appendChild(titleP)
-    teacherInfo.appendChild(achievementsUl)
-
-    teacherCard.appendChild(teacherImage)
-    teacherCard.appendChild(teacherInfo)
-
-    teachersGrid.appendChild(teacherCard)
-  })
-}
 
 // Render Achievements Section
 function renderAchievements(achievementsData) {
@@ -544,81 +583,38 @@ function renderDealsMiddle(dealsData) {
   methodSection.insertAdjacentElement('afterend', dealsMiddleSection)
 }
 
-// Render Deals Footer Section
-function renderDealsFooter(dealsData) {
-  const footerSection = document.querySelector(".site-footer")
-  const dealsFooterSection = createElement("section", { classes: ["deals-footer-section"] })
-  dealsFooterSection.innerHTML = `
-    <div class="container">
-      <div class="deals-footer-content">
-        <div class="deals-footer-text">
-          <h2 class="deals-footer-title">${dealsData.footer.title}</h2>
-          <p class="deals-footer-subtitle">${dealsData.footer.subtitle}</p>
-          <div class="deals-footer-countdown" id="dealsCountdown">
-            <div class="countdown-item">
-              <span class="countdown-number" id="days">00</span>
-              <span class="countdown-label">Ngày</span>
-            </div>
-            <div class="countdown-item">
-              <span class="countdown-number" id="hours">00</span>
-              <span class="countdown-label">Giờ</span>
-            </div>
-            <div class="countdown-item">
-              <span class="countdown-number" id="minutes">00</span>
-              <span class="countdown-label">Phút</span>
-            </div>
-            <div class="countdown-item">
-              <span class="countdown-number" id="seconds">00</span>
-              <span class="countdown-label">Giây</span>
-            </div>
-          </div>
-          <a href="#contact" class="btn btn-primary btn-large deals-footer-cta">
-            <span>${dealsData.footer.cta}</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="deals-footer-image">
-          <img src="${dealsData.footer.image}" alt="Deals Footer">
-        </div>
-      </div>
-    </div>
-  `
-  footerSection.insertAdjacentElement('beforebegin', dealsFooterSection)
-}
-
-// Countdown function for footer deals
-function startCountdown(targetDate) {
-  const countdownInterval = setInterval(() => {
-    const now = new Date().getTime()
-    const distance = targetDate - now
-
-    if (distance < 0) {
-      clearInterval(countdownInterval)
-      document.getElementById('dealsCountdown').innerHTML = '<p>Ưu đãi đã kết thúc!</p>'
-      return
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24))
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000)
-
-    document.getElementById('days').textContent = days.toString().padStart(2, '0')
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0')
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0')
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0')
-  }, 1000)
-}
 
 
-// Main render function to call all
-function renderAll() {
+
+
+// Main render function to load and render all components
+async function renderAll() {
   if (!window.data) {
     console.error("Data object not found.")
     return
   }
+
+  const components = [
+    'header',
+    'hero',
+    'about',
+    'reasons',
+    'promotions',
+    'courses',
+    'achievements',
+    'contact',
+    'footer',
+    "new",
+  ]
+
+  for (const component of components) {
+    const html = await loadComponent(component)
+    if (html) {
+      renderComponent(component, html)
+    }
+  }
+
+  // After loading components, render dynamic data
   renderNav(window.data.nav)
   renderHero(window.data.hero)
   renderAbout(window.data.about)
@@ -628,14 +624,58 @@ function renderAll() {
   renderTeachers(window.data.teachers)
   renderAchievements(window.data.achievements)
   renderContact(window.data.contact)
-  renderDealsFooter(window.data.deals)
 }
 
 // Run render on DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   renderAll()
-  // Start countdown for deals footer (set to end in 7 days from now)
-  const targetDate = new Date()
-  targetDate.setDate(targetDate.getDate() + 7)
-  startCountdown(targetDate.getTime())
 })
+
+
+function initAboutSlider() {
+    // Chọn đúng wrapper trong section #about
+    const wrapper = document.querySelector('#about .about-image-wrapper');
+    if (!wrapper) return;
+
+    const slider = wrapper.querySelector('.about-image-slider');
+    const nextBtn = wrapper.querySelector('.nav-next');
+    const prevBtn = wrapper.querySelector('.nav-prev');
+
+    // Bây giờ chúng ta có thể kiểm tra ảnh ngay lập tức
+    const images = wrapper.querySelectorAll('.about-image-slider img');
+    if (!slider || !images || images.length === 0) return;
+
+    let currentIndex = 0;
+    const totalImages = images.length;
+    const slideInterval = 3000; // 3 giây
+    let autoPlay;
+
+    function goToSlide(index) {
+        if (index < 0) index = totalImages - 1;
+        else if (index >= totalImages) index = 0;
+        
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        currentIndex = index;
+    }
+
+    function startAutoPlay() {
+        if (totalImages > 1) {
+            autoPlay = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, slideInterval);
+        }
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlay);
+    }
+
+    startAutoPlay();
+    wrapper.addEventListener('mouseenter', stopAutoPlay);
+    wrapper.addEventListener('mouseleave', startAutoPlay);
+
+    if (nextBtn && prevBtn) {
+        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    }
+}

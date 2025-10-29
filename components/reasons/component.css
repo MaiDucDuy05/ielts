@@ -1,0 +1,192 @@
+/* Reasons Section */
+.reasons-section {
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+  padding: var(--spacing-3xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.reasons-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(51, 0, 102, 0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+  position: relative;
+  z-index: 1;
+}
+
+.reason-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  padding: var(--spacing-xl);
+  text-align: center;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.reason-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: var(--shadow-2xl);
+  border-color: var(--primary);
+}
+
+.reason-card-1 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(51, 0, 102, 0.05) 100%);
+}
+
+.reason-card-2 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(0, 204, 153, 0.05) 100%);
+}
+
+.reason-card-3 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 193, 7, 0.05) 100%);
+}
+
+.reason-card-4 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(220, 53, 69, 0.05) 100%);
+}
+
+.reason-card-5 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(0, 123, 255, 0.05) 100%);
+}
+
+.reason-card-6 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 126, 20, 0.05) 100%);
+}
+
+.reason-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-600) 100%);
+  border-radius: 50%;
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.reason-card:hover .reason-icon {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-xl);
+}
+
+.reason-number {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(255, 255, 255, 0.9);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--primary);
+}
+
+.reason-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.4;
+}
+
+.reason-description {
+  color: var(--gray-600);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Add animation on scroll */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reason-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.reason-card:nth-child(1) { animation-delay: 0.1s; }
+.reason-card:nth-child(2) { animation-delay: 0.2s; }
+.reason-card:nth-child(3) { animation-delay: 0.3s; }
+.reason-card:nth-child(4) { animation-delay: 0.4s; }
+.reason-card:nth-child(5) { animation-delay: 0.5s; }
+.reason-card:nth-child(6) { animation-delay: 0.6s; }
+
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* desktop mặc định 3 cột */
+  gap: var(--spacing-xl);
+  position: relative;
+  z-index: 1;
+}
+
+/* Tablet: giữ 2 cột */
+@media (max-width: 1024px) {
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: vẫn 2 cột nhưng nhỏ hơn */
+@media (max-width: 600px) {
+  .reasons-grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .reason-card {
+    padding: var(--spacing-md);
+  }
+
+  .reason-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .reason-title {
+    font-size: 1rem;
+  }
+
+  .reason-description {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .reason-number {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}

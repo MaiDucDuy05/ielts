@@ -27,26 +27,58 @@ const data = {
   // About Section
   about: {
     label: "Giới thiệu",
-    title: "Về chúng tôi",
-    subtitle: "MindUp - Nơi khơi dậy tiềm năng và đam mê học tập tiếng Anh",
+    title: "VỀ CHÚNG TÔI - TRUNG TÂM ANH NGỮ",
+    subtitle: "MindUp cam kết kiến tạo lộ trình học tập hiệu quả, cá nhân hóa, giúp học viên chinh phục IELTS và mở cánh cửa tương lai.",
     intro:
-      "MindUp được thành lập với sứ mệnh mang đến trải nghiệm học tập tiếng Anh hiện đại và hiệu quả nhất cho người Việt Nam. Với đội ngũ giảng viên giàu kinh nghiệm, phương pháp giảng dạy khoa học và cam kết đầu ra rõ ràng, chúng tôi đã giúp hàng nghìn học viên chinh phục mục tiêu IELTS và tự tin sử dụng tiếng Anh trong cuộc sống.",
-    image: "/public/classroom/6.jpg",
+      "",
+    images: [
+          { 
+              "url": "/public/about/1.png", 
+              "caption": "Trung Tâm MindUp" 
+          },
+          { 
+              "url": "/public/about/2.png", 
+              "caption": "Khoá học mất gốc" 
+          },
+          { 
+              "url": "/public/about/3.png", 
+              "caption": "Khoá Ielts 3.0 - 4.5+" 
+          },{ 
+              "url": "/public/about/4.png", 
+              "caption": "Khoá Ielts 5.0 - 6.5+" 
+          },
+          { 
+              "url": "/public/about/5.png", 
+              "caption": "Khoá Ielts 7.0 - 8.0+" 
+          },
+          { 
+              "url": "/public/about/6.png", 
+              "caption": "Học Phí" 
+          },
+          { 
+              "url": "/public/about/10.png", 
+              "caption": "Ưu đãi" 
+          }
+
+      ],
     features: [
       {
         title: "Phương pháp học tập khoa học",
-        description: "Kết hợp lý thuyết và thực hành, tập trung phát triển 4 kỹ năng toàn diện",
+        description: "Kết hợp lý thuyết và thực hành, tập trung phát triển 4 kỹ năng toàn diện, đảm bảo nền tảng vững chắc.",
       },
       {
-        title: "Đội ngũ giảng viên chất lượng",
-        description: "100% giảng viên có chứng chỉ 8.0+ IELTS và kinh nghiệm giảng dạy lâu năm",
+        title: "Đội ngũ giảng viên 8.0+ IELTS",
+        description: "100% giảng viên có chứng chỉ 8.0+ IELTS và kinh nghiệm giảng dạy lâu năm, tận tâm theo sát từng học viên.",
       },
       {
-        title: "Cam kết đầu ra rõ ràng",
-        description: "Lộ trình học tập cá nhân hóa với mục tiêu cụ thể cho từng học viên",
+        title: "Cam kết đầu ra bằng văn bản",
+        description: "Lộ trình học tập cá nhân hóa với mục tiêu cụ thể, cam kết hoàn tiền hoặc học lại miễn phí nếu không đạt.",
       },
     ],
     badge: { number: "5+", text: "Năm kinh nghiệm" },
+    mission: "Cung cấp giải pháp giáo dục tiếng Anh hiệu quả và toàn diện nhất, giúp người Việt tự tin hòa nhập toàn cầu và đạt được ước mơ học tập, nghề nghiệp.",
+    vision: "Trở thành tổ chức giáo dục tiếng Anh hàng đầu Việt Nam, được công nhận về chất lượng đào tạo và sự cam kết đối với thành công của học viên.",
+    coreValues: "Tận tâm (Dedication), Sáng tạo (Innovation), Hiệu quả (Efficiency), và Cam kết (Commitment).",
   },
 
   // Method Section
@@ -490,7 +522,6 @@ const data = {
       { text: "Trang chủ", href: "#home" },
       { text: "Về chúng tôi", href: "#about" },
       { text: "Khóa học", href: "#courses" },
-      { text: "Giảng viên", href: "#teachers" },
       { text: "Thành tích", href: "#achievements" },
       { text: "Liên hệ", href: "#contact", class: "btn-nav" },
     ],

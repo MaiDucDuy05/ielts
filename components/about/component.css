@@ -1,0 +1,632 @@
+/* ==================================================== */
+/* 1. KEYFRAMES (Định nghĩa các hiệu ứng)
+/* ==================================================== */
+
+/* Keyframes cho hiệu ứng trượt vào */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Keyframe cho hiệu ứng trượt lên (dùng cho responsive) */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframe cho shadow pulse (dùng cho icon) */
+@keyframes pulse-shadow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(163, 102, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(163, 102, 255, 0);
+  }
+}
+
+
+.about-section {
+  margin-bottom: -20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    var(--gray-50) 100%
+  );
+  padding: var(--spacing-3xl) 0;
+  overflow-x: hidden;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-lg);
+  min-height: 80vh;
+}
+
+/* ==================================================== */
+/* 3. VÙNG NỘI DUNG VĂN BẢN (Text Content)
+/* ==================================================== */
+
+.about-text-content {
+  opacity: 0;
+  animation: fadeUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- INTRO TEXT --- */
+.about-intro {
+  font-size: 1.15rem;
+  color: #6b21a8;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+/* --- FEATURE LAYOUT --- */
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* --- FEATURE CARD --- */
+.feature-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f3e8ff);
+  border-radius: 14px;
+  border-left: 5px solid #8b5cf6;
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.1);
+  transition: all 0.3s ease;
+  align-items: flex-start;
+}
+
+.feature-item:hover {
+  background: linear-gradient(145deg, #faf5ff, #ede9fe);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+  transform: translateY(-6px);
+  border-left-color: #a855f7;
+}
+
+/* --- ICON --- */
+.feature-icon {
+  flex-shrink: 0;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.08);
+  border-radius: 12px;
+  padding: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.feature-icon svg {
+  color: #8b5cf6;
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.3;
+}
+
+.feature-item:hover .feature-icon {
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.12);
+  transform: scale(1.1);
+}
+
+/* --- CONTENT --- */
+.feature-content h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2e1065;
+  margin-bottom: 0.4rem;
+}
+
+.feature-content p {
+  color: #6b21a8;
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+/* ==================================================== */
+/* 4. VÙNG SLIDER HÌNH ẢNH (Image Slider)
+/* ==================================================== */
+
+.about-image-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 3 / 5;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: slideInRight 1s ease-out 0.3s forwards;
+  will-change: transform, opacity;
+}
+
+.about-image-slider .slide-item img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-2xl);
+}
+
+.slider-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-image-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.about-image-slider .slide-item {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.about-image-slider .slide-item img {
+  width: 100%;
+  display: block;
+}
+
+.slide-caption {
+  color: var(--primary, #1a2b48);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 12px 12px;
+  margin: 0;
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 11;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.slider-nav button {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-nav button:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+/* ==================================================== */
+/* 5. VÙNG MISSION, VISION, VALUES (MVV)
+/* ==================================================== */
+
+.about-mvv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  border-top: 1px solid var(--gray-200);
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(180deg, var(--gray-50) 0%, #f7f5fa 100%);
+}
+
+.mvv-card {
+  padding: var(--spacing-xl);
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  border: 1px solid var(--gray-100);
+  will-change: transform, box-shadow;
+  text-align: left;
+}
+
+.mvv-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--accent);
+  transform: translateY(-10px);
+}
+
+.mvv-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-300) 100%
+  );
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+  animation: pulse-shadow-accent 3s infinite linear;
+}
+
+@keyframes pulse-shadow-accent {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(224, 64, 251, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(224, 64, 251, 0);
+  }
+}
+
+.mvv-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.5;
+}
+
+.mvv-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  color: var(--primary-dark, #1a0033);
+  margin-bottom: var(--spacing-md);
+}
+
+.mvv-description {
+  color: var(--gray-600);
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ==================================================== */
+/* 6. RESPONSIVE - TABLET (768px - 1024px)
+/* ==================================================== */
+
+@media (max-width: 1024px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    min-height: auto;
+    gap: var(--spacing-2xl);
+  }
+
+  .about-image-wrapper {
+    order: -1;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.3s forwards;
+    aspect-ratio: 4 / 5;
+    max-width: 100%;
+  }
+
+  .about-text-content {
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .about-intro {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-features {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-item {
+    padding: 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .feature-content h4 {
+    font-size: 1rem;
+  }
+
+  .feature-content p {
+    font-size: 0.9rem;
+  }
+
+  .about-mvv-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+
+  .mvv-card {
+    padding: var(--spacing-lg);
+  }
+
+  .mvv-title {
+    font-size: 1.25rem;
+  }
+
+  .mvv-description {
+    font-size: 0.95rem;
+  }
+
+  .slider-nav button {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+}
+
+/* ==================================================== */
+/* 7. RESPONSIVE - MOBILE (max-width: 768px)
+/* ==================================================== */
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: var(--spacing-2xl) 0;
+    margin-bottom: -10px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    min-height: auto;
+    gap: var(--spacing-xl);
+  }
+
+  .about-image-wrapper {
+    order: -1;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.3s forwards;
+    aspect-ratio: 9 / 12;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .about-text-content {
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.5s forwards;
+  }
+
+  .about-intro {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-item {
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 10px;
+  }
+
+  .feature-icon {
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .feature-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .feature-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .feature-content p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .about-mvv-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-md);
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .mvv-card {
+    padding: var(--spacing-md);
+    border-radius: 12px;
+  }
+
+  .mvv-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .mvv-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .mvv-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mvv-title {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .mvv-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .slider-nav {
+    padding: 0 8px;
+  }
+
+  .slider-nav button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .slide-caption {
+    font-size: 1rem;
+    padding: 10px 8px;
+  }
+}
+
+/* ==================================================== */
+/* 8. RESPONSIVE - MOBILE NHỎ (max-width: 640px)
+/* ==================================================== */
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: var(--spacing-xl) 0;
+    margin-bottom: -5px;
+  }
+
+  .about-content {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+    gap: var(--spacing-lg);
+  }
+
+  .about-image-wrapper {
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+  }
+
+  .about-intro {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-features {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-item {
+    padding: 0.875rem;
+    gap: 0.625rem;
+  }
+
+  .feature-content h4 {
+    font-size: 0.9rem;
+  }
+
+  .feature-content p {
+    font-size: 0.8rem;
+  }
+
+  .about-mvv-grid {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
+
+  .mvv-card {
+    padding: var(--spacing-sm);
+  }
+
+  .mvv-icon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .mvv-title {
+    font-size: 1rem;
+  }
+
+  .mvv-description {
+    font-size: 0.85rem;
+  }
+
+  .slider-nav button {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .slide-caption {
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+}
+
+.about-view-more {
+  display: block;
+  margin: 40px;
+  text-align: center;
+}
+
+.about-view-more a {
+  border: 2px solid var(--primary-600);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.section-actions a {
+  width: auto;
+}

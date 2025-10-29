@@ -1,0 +1,369 @@
+
+
+/* ============================================== */
+/* KEYFRAMES CUỘN                 */
+/* ============================================== */
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================== */
+/* CẤU TRÚC CHÍNH                  */
+/* ============================================== */
+
+.testimonials-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 2rem;    /* py-8 */
+  padding-bottom: 2rem; /* py-8 */
+}
+
+.container-testimonials {
+  max-width: 1920px; /* max-w-screen-3xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;   /* px-4 */
+  padding-right: 1rem;  /* px-4 */
+}
+
+.gradient-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px; /* rounded-[32px] */
+  background-image: linear-gradient(to bottom, #29004d, #550079);
+  padding-top: 2rem;    /* pt-8 */
+  padding-bottom: 2rem; /* pb-8 */
+}
+
+.content-flex-container {
+  /* Gradient mask cho mobile */
+  mask-image: linear-gradient(to right, transparent, white 5%, white 95%, transparent);
+}
+
+/* ============================================== */
+/* KHỐI NỘI DUNG VĂN BẢN            */
+/* ============================================== */
+
+.text-content-block {
+  display: flex;
+  justify-content: center;
+  padding-left: 1.5rem;  /* px-6 */
+  padding-right: 1.5rem; /* px-6 */
+}
+
+.text-content-inner {
+  max-width: 42rem; /* md:max-w-2xl */
+}
+
+.space-y-4 > *:not([hidden]) ~ *:not([hidden]) {
+  margin-top: 1rem; /* space-y-4 */
+}
+
+.text-content-inner h2 {
+  font-family: sans-serif; /* font-sans */
+  font-size: 1.875rem;     /* text-3xl */
+  line-height: 2.25rem;
+  font-weight: 700;        /* font-bold */
+  color: var(--white);
+  line-height: 1.2;        /* leading-tight */
+  text-align: center;
+}
+
+.text-content-inner p {
+  font-size: 1rem;        /* text-base */
+  line-height: 1.625;     /* leading-relaxed */
+  color: rgba(255, 255, 255, 0.9); /* text-white/90 */
+  text-align: center;
+}
+
+/* ============================================== */
+/* KHỐI CUỘN (DESKTOP)            */
+/* ============================================== */
+
+.scrolling-desktop-block {
+  display: none; /* hidden */
+  position: relative;
+}
+
+.scrolling-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* grid-cols-2 */
+  gap: 2rem; /* gap-8 */
+  padding-right: 4rem; /* pr-16 */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* gap-8 */
+  overflow: hidden;
+  max-height: 900px;
+  width: 352px;
+}
+
+.column-1 {
+  transform: translateY(-2.5rem); /* -translate-y-10 */
+}
+.column-2 {
+  transform: translateY(2.5rem); /* translate-y-10 */
+}
+
+.animate-scroll-up,
+.animate-scroll-down {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation-duration: 100s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-scroll-up {
+  animation-name: scroll-up;
+}
+.animate-scroll-down {
+  animation-name: scroll-down;
+}
+
+
+/* ============================================== */
+/* KHỐI CUỘN (MOBILE)            */
+/* ============================================== */
+
+.scrolling-mobile-block {
+  margin-top: 2rem; /* mt-8 */
+  overflow: hidden;
+  padding-left: 1.5rem; /* px-6 */
+  padding-right: 1.5rem; /* px-6 */
+}
+
+.animate-scroll-horizontal {
+  display: flex;
+  gap: 1rem; /* gap-4 */
+  width: max-content;
+  animation-name: scroll-horizontal;
+  animation-duration: 40s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.mobile-card-wrapper {
+  flex-shrink: 0;
+  width: 300px;
+}
+
+
+/* ============================================== */
+/* THẺ TESTIMONIAL                */
+/* ============================================== */
+
+.testimonial-card {
+  display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: fit-content;
+    width: auto;
+    margin: 4px;
+    border-radius: 0.75rem;
+    border: 1px solid var(--gray-200);
+    background-color: var(--white);
+    /* padding: 1.5rem; */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s 
+ease-in-out;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* hover:shadow-md */
+}
+
+/* Thẻ Feedback (chỉ có ảnh) */
+.feedback-card .feedback-image {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+/* Header thẻ tiêu chuẩn */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem; /* gap-4 */
+}
+
+.avatar {
+  width: 3rem;  /* w-12 */
+  height: 3rem; /* h-12 */
+  border-radius: 9999px; /* rounded-full */
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+}
+
+.name {
+  font-weight: 600; /* font-semibold */
+  color: var(--gray-900);
+}
+
+.age {
+  font-size: 0.875rem; /* text-sm */
+  color: var(--gray-500);
+}
+
+.course {
+  font-size: 0.875rem; /* text-sm */
+  color: var(--gray-600);
+}
+
+/* Rating */
+.rating {
+  display: flex;
+  gap: 0.25rem; /* gap-1 */
+}
+.rating svg {
+  width: 1.25rem;  /* w-5 */
+  height: 1.25rem; /* h-5 */
+  fill: #f4e842;
+}
+
+/* Content */
+.content {
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.625;  /* leading-relaxed */
+  color: var(--gray-700);
+}
+
+/* Achievement */
+.achievement {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+  border-radius: 9999px; /* rounded-full */
+  background-color: var(--primary-100);
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+}
+.achievement svg {
+  width: 1.25rem;  /* w-5 */
+  height: 1.25rem; /* h-5 */
+  color: var(--primary-600);
+}
+.achievement span {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  color: var(--primary-700);
+}
+
+
+/* ============================================== */
+/* MEDIA QUERIES                  */
+/* ============================================== */
+
+/* md: 768px */
+@media (min-width: 768px) {
+  .testimonials-section {
+    padding-top: 3rem;    /* md:py-12 */
+    padding-bottom: 3rem; /* md:py-12 */
+  }
+  .container {
+    padding-left: 1.5rem;   /* md:px-6 */
+    padding-right: 1.5rem;  /* md:px-6 */
+  }
+  .gradient-wrapper {
+    border-radius: 48px; /* md:rounded-[48px] */
+    padding-top: 2.5rem;    /* md:pt-10 */
+    padding-bottom: 3rem; /* md:pb-12 */
+  }
+  .text-content-block {
+    padding-left: 2rem;  /* md:px-8 */
+    padding-right: 2rem; /* md:px-8 */
+  }
+  .text-content-inner h2 {
+    font-size: 2.25rem; /* md:text-4xl */
+    line-height: 1.2;   /* md:leading-tight */
+  }
+  .text-content-inner p {
+    font-size: 1.125rem; /* md:text-lg */
+    line-height: 1.75rem; /* md:leading-relaxed */
+  }
+}
+
+
+/* 2xl: 1536px */
+@media (min-width: 1024px) {
+  .testimonials-section {
+    padding-top: 5rem;    /* 2xl:py-20 */
+    padding-bottom: 5rem; /* 2xl:py-20 */
+  }
+  .container {
+    padding-left: 5rem;   /* 2xl:px-20 */
+    padding-right: 5rem;  /* 2xl:px-20 */
+  }
+  .gradient-wrapper {
+    padding-top: 0;    /* 2xl:pt-0 */
+    padding-bottom: 0; /* 2xl:pb-0 */
+  }
+  .content-flex-container {
+    display: flex;
+    justify-content: space-between;
+    height: 800px;
+    /* Gradient mask cho desktop */
+    mask-image: linear-gradient(to bottom, transparent, white 10%, white 90%, transparent);
+  }
+  .text-content-block {
+    display: flex;
+    align-items: center;
+    padding-left: 4rem;  /* 2xl:pl-16 */
+    padding-right: 0;    /* 2xl:pr-0 */
+  }
+  .text-content-inner {
+    max-width: 28rem; /* 2xl:max-w-md */
+  }
+  .text-content-inner h2 {
+    text-align: left; /* 2xl:text-left */
+  }
+  .text-content-inner p {
+    text-align: left; /* 2xl:text-left */
+  }
+  .scrolling-desktop-block {
+    display: block; /* 2xl:block */
+  }
+  .scrolling-mobile-block {
+    display: none; /* 2xl:hidden */
+  }
+}

@@ -222,23 +222,7 @@ const dealsClose = document.getElementById('dealsClose')
 const dealsOverlay = document.querySelector('.deals-overlay')
 const dealsGrid = document.getElementById('dealsGrid')
 
-// Open modal
-dealsBtn.addEventListener('click', () => {
-  populateDeals()
-  dealsModal.classList.add('active')
-  body.style.overflow = 'hidden'
-})
 
-// Close modal
-dealsClose.addEventListener('click', () => {
-  dealsModal.classList.remove('active')
-  body.style.overflow = ''
-})
-
-dealsOverlay.addEventListener('click', () => {
-  dealsModal.classList.remove('active')
-  body.style.overflow = ''
-})
 
 // Populate deals
 function populateDeals() {

@@ -1,0 +1,158 @@
+/* Header with cleaner gradient using new color scale */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-800) 100%);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+  padding: 20px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--white);
+}
+
+.logo-text strong {
+  font-weight: 700;
+  /* Using accent color for brand emphasis */
+  color: var(--accent);
+}
+
+/* Navigation */
+.main-nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  list-style: none;
+}
+
+.nav-menu a {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+.nav-menu a:not(.btn-nav):hover {
+  /* Accent color for hover states */
+  color: var(--accent);
+}
+
+.nav-menu a:not(.btn-nav)::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  /* Accent color for underline effect */
+  background: var(--accent);
+  transition: width var(--transition-base);
+}
+
+.nav-menu a:not(.btn-nav):hover::after {
+  width: 100%;
+}
+
+/* Updated nav button with accent color for strong CTA */
+.btn-nav {
+  padding: 0.625rem 1.5rem;
+  background: var(--accent);
+  color: var(--white) !important;
+  border-radius: var(--radius-full);
+}
+
+.btn-nav:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+}
+
+/* Responsive Design for Header */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--primary);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu li {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-menu li:last-child {
+    border-bottom: none;
+  }
+
+  .btn-nav {
+    display: block;
+    text-align: center;
+  }
+}
