@@ -128,7 +128,7 @@
 
 .footer-contact svg {
   flex-shrink: 0;
-  color: var(--primary);
+  color: var(--white);
   width: 18px;
   height: 18px;
 }

@@ -1,7 +1,7 @@
 
+
+
 const body = document.body
-
-
 
 // Back to Top Button
 const backToTop = document.getElementById("backToTop")
@@ -156,21 +156,7 @@ document
     fadeInObserver.observe(element)
   })
 
-// Header scroll effect
-let lastScroll = 0
-const header = document.querySelector(".site-header")
 
-window.addEventListener("scroll", () => {
-  const currentScroll = window.pageYOffset
-
-  if (currentScroll > 100) {
-    header.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.1)"
-  } else {
-    header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.05)"
-  }
-
-  lastScroll = currentScroll
-})
 // Promotional Deals Modal
 const dealsModal = document.getElementById('dealsModal')
 const dealsBtn = document.getElementById('dealsBtn')

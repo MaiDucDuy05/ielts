@@ -566,6 +566,41 @@ document.addEventListener("DOMContentLoaded", () => {
   renderAll()
 })
 
+document.addEventListener("submit", async (e) => {
+  const form = e.target.closest("#contactForm");
+  const submitBtn = form.querySelector("button[type='submit']");
+  if (!form) return; 
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Đang gửi...";
+
+  const formData = {
+    name: form.name.value.trim(),
+    phone: form.phone.value.trim(),
+    email: form.email.value.trim(),
+    course: form.course.value,
+    message: form.message.value.trim(),
+  };
+
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbzesHtuwbaseHDR3pwE5KTP764M2Njd-9WpKZE_H1-1Og3A7YF_F7YPmjusSBTg2Z0/exec", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    alert("🎉 Gửi thông tin thành công! Chúng tôi sẽ liên hệ sớm nhất.");
+    form.reset();
+  } catch (error) {
+    console.error("Lỗi khi gửi form:", error);
+    alert("⚠️ Có lỗi xảy ra. Vui lòng thử lại sau!");
+  } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Đăng KÝ NGAY";
+    }
+});
+
 
 function initAboutSlider() {
     // Chọn đúng wrapper trong section #about
