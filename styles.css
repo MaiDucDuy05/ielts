@@ -859,7 +859,6 @@
 
     .back-to-top {
       right: var(--spacing-md);
-      bottom: calc(var(--spacing-md) + 180px);
     }
   }
 

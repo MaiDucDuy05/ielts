@@ -181,8 +181,6 @@ function renderNav(navData) {
 
 // Render About Section
 function renderAbout(aboutData) {
-  const sectionLabel = document.querySelector("#about .section-label")
-  sectionLabel.textContent = aboutData.label
 
   const sectionTitle = document.querySelector("#about .section-title")
   sectionTitle.textContent = aboutData.title

@@ -8,7 +8,7 @@
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-800) 100%);
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-base);
-  padding: 20px;
+  padding: 8px;
 }
 
 .header-content {
@@ -121,7 +121,7 @@
 
   .nav-menu {
     position: fixed;
-    top: 80px;
+    top: 50px;
     left: 0;
     right: 0;
     flex-direction: column;

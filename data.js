@@ -26,7 +26,7 @@ const data = {
 
   // About Section
   about: {
-    label: "Giới thiệu",
+    // label: "Giới thiệu",
     title: "VỀ CHÚNG TÔI - TRUNG TÂM ANH NGỮ",
     subtitle: "MindUp cam kết kiến tạo lộ trình học tập hiệu quả, cá nhân hóa, giúp học viên chinh phục IELTS và mở cánh cửa tương lai.",
     intro:
