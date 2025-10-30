@@ -48,7 +48,6 @@ async function loadComponent(componentName) {
 // Function to render component into container
 function renderComponent(containerId, html) {
   const container = document.getElementById(containerId)
-  console.log(container)
   if (container && html) {
     container.innerHTML = html
   }
@@ -66,84 +65,119 @@ function renderNav(navData) {
     li.appendChild(a)
     navMenu.appendChild(li)
   })
+
+    const menuToggle = document.querySelector(".menu-toggle")
+    const body = document.body
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active")
+        menuToggle.classList.toggle("active")
+
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains("active")) {
+          body.style.overflow = "hidden"
+        } else {
+          body.style.overflow = ""
+        }
+      })
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".main-nav") && navMenu.classList.contains("active")) {
+          navMenu.classList.remove("active")
+          menuToggle.classList.remove("active")
+          body.style.overflow = ""
+        }
+      })
+
+      // Close menu when clicking on a link
+      navMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active")
+          menuToggle.classList.remove("active")
+          body.style.overflow = ""
+        })
+      })
+    }
 }
 
 // Render Hero Section
-function renderHero(heroData) {
-  const heroTitle = document.querySelector(".hero-title")
-  heroTitle.innerHTML = heroData.title
+// function renderHero(heroData) {
+//   const heroTitle = document.querySelector(".hero-title")
+//   heroTitle.innerHTML = heroData.title
 
-  const heroSubtitle = document.querySelector(".hero-subtitle")
-  heroSubtitle.textContent = heroData.subtitle
+//   const heroSubtitle = document.querySelector(".hero-subtitle")
+//   heroSubtitle.textContent = heroData.subtitle
 
-  const heroDescription = document.querySelector(".hero-description")
-  heroDescription.textContent = heroData.description
+//   const heroDescription = document.querySelector(".hero-description")
+//   heroDescription.textContent = heroData.description
 
-  const btnPrimary = document.querySelector(".hero-buttons .btn-primary span")
-  btnPrimary.textContent = heroData.buttonPrimary
+//   const btnPrimary = document.querySelector(".hero-buttons .btn-primary span")
+//   btnPrimary.textContent = heroData.buttonPrimary
 
-  const btnOutline = document.querySelector(".hero-buttons .btn-outline")
-  btnOutline.textContent = heroData.buttonOutline
-  btnOutline.style.color = "#fff"  
+//   const btnOutline = document.querySelector(".hero-buttons .btn-outline")
+//   btnOutline.textContent = heroData.buttonOutline
+//   btnOutline.style.color = "#fff"  
 
 
-  // Render Hero Form
-  const heroForm = document.querySelector(".hero-form")
-  if (heroData.form) {
-    heroForm.innerHTML = `
-      <form id="heroForm" class="hero-contact-form">
-        <h3>${heroData.form.title}</h3>
-        <p>${heroData.form.subtitle}</p>
-        <div class="form-group">
-          <label for="hero-name">${heroData.form.fields.name.label} ${heroData.form.fields.name.required ? '<span class="required">*</span>' : ''}</label>
-          <input type="text" id="hero-name" name="name" placeholder="${heroData.form.fields.name.placeholder}" ${heroData.form.fields.name.required ? 'required' : ''}>
-        </div>
-        <div class="form-group">
-          <label for="hero-phone">${heroData.form.fields.phone.label} ${heroData.form.fields.phone.required ? '<span class="required">*</span>' : ''}</label>
-          <input type="tel" id="hero-phone" name="phone" placeholder="${heroData.form.fields.phone.placeholder}" ${heroData.form.fields.phone.required ? 'required' : ''}>
-        </div>
-        <div class="form-group">
-          <label for="hero-email">${heroData.form.fields.email.label}</label>
-          <input type="email" id="hero-email" name="email" placeholder="${heroData.form.fields.email.placeholder}">
-        </div>
-        <div class="form-group">
-          <label for="hero-level">${heroData.form.fields.level.label}</label>
-          <select id="hero-level" name="level">
-            ${heroData.form.fields.level.options.map(option => `<option value="${option}">${option}</option>`).join('')}
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="hero-message">${heroData.form.fields.message.label}</label>
-          <textarea id="hero-message" name="message" rows="3" placeholder="${heroData.form.fields.message.placeholder}"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-large btn-block">
-          <span>${heroData.form.submitText}</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <p class="form-note">${heroData.form.note}</p>
-      </form>
-    `
-  }
+//   // Render Hero Form
+//   const heroForm = document.querySelector(".hero-form")
+//   if (heroData.form) {
+//     heroForm.innerHTML = `
+//       <form id="heroForm" class="hero-contact-form">
+//         <h3>${heroData.form.title}</h3>
+//         <p>${heroData.form.subtitle}</p>
+//         <div class="form-group">
+//           <label for="hero-name">${heroData.form.fields.name.label} ${heroData.form.fields.name.required ? '<span class="required">*</span>' : ''}</label>
+//           <input type="text" id="hero-name" name="name" placeholder="${heroData.form.fields.name.placeholder}" ${heroData.form.fields.name.required ? 'required' : ''}>
+//         </div>
+//         <div class="form-group">
+//           <label for="hero-phone">${heroData.form.fields.phone.label} ${heroData.form.fields.phone.required ? '<span class="required">*</span>' : ''}</label>
+//           <input type="tel" id="hero-phone" name="phone" placeholder="${heroData.form.fields.phone.placeholder}" ${heroData.form.fields.phone.required ? 'required' : ''}>
+//         </div>
+//         <div class="form-group">
+//           <label for="hero-email">${heroData.form.fields.email.label}</label>
+//           <input type="email" id="hero-email" name="email" placeholder="${heroData.form.fields.email.placeholder}">
+//         </div>
+//         <div class="form-group">
+//           <label for="hero-level">${heroData.form.fields.level.label}</label>
+//           <select id="hero-level" name="level">
+//             ${heroData.form.fields.level.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+//           </select>
+//         </div>
+//         <div class="form-group">
+//           <label for="hero-message">${heroData.form.fields.message.label}</label>
+//           <textarea id="hero-message" name="message" rows="3" placeholder="${heroData.form.fields.message.placeholder}"></textarea>
+//         </div>
+//         <button type="submit" class="btn btn-primary btn-large btn-block">
+//           <span>${heroData.form.submitText}</span>
+//           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+//             <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+//           </svg>
+//         </button>
+//         <p class="form-note">${heroData.form.note}</p>
+//       </form>
+//     `
+//   }
 
-  // Stats Bar
-  const statsGrid = document.querySelector(".stats-grid")
-  statsGrid.innerHTML = ""
-  heroData.stats.forEach((stat) => {
-    const statItem = createElement("div", { classes: ["stat-item"] })
-    const statIcon = createElement("div", { classes: ["stat-icon"], text: stat.icon })
-    const statContent = createElement("div", { classes: ["stat-content"] })
-    const statNumber = createElement("h3", { classes: ["stat-number"], text: stat.number })
-    const statLabel = createElement("p", { classes: ["stat-label"], text: stat.label })
+//   // Stats Bar
+//   const statsGrid = document.querySelector(".stats-grid")
+//   statsGrid.innerHTML = ""
+//   heroData.stats.forEach((stat) => {
+//     const statItem = createElement("div", { classes: ["stat-item"] })
+//     const statIcon = createElement("div", { classes: ["stat-icon"], text: stat.icon })
+//     const statContent = createElement("div", { classes: ["stat-content"] })
+//     const statNumber = createElement("h3", { classes: ["stat-number"], text: stat.number })
+//     const statLabel = createElement("p", { classes: ["stat-label"], text: stat.label })
 
-    statContent.appendChild(statNumber)
-    statContent.appendChild(statLabel)
-    statItem.appendChild(statIcon)
-    statItem.appendChild(statContent)
-    statsGrid.appendChild(statItem)
-  })
-}
+//     statContent.appendChild(statNumber)
+//     statContent.appendChild(statLabel)
+//     statItem.appendChild(statIcon)
+//     statItem.appendChild(statContent)
+//     statsGrid.appendChild(statItem)
+//   })
+// }
 
 // Render About Section
 function renderAbout(aboutData) {
@@ -404,101 +438,6 @@ function renderCourses(coursesData) {
 }
 
 
-// Render Achievements Section
-function renderAchievements(achievementsData) {
-  const sectionLabel = document.querySelector("#achievements .section-label")
-  sectionLabel.textContent = achievementsData.label
-
-  const sectionTitle = document.querySelector("#achievements .section-title")
-  sectionTitle.textContent = achievementsData.title
-
-  const sectionSubtitle = document.querySelector("#achievements .section-subtitle")
-  sectionSubtitle.textContent = achievementsData.subtitle
-
-  const achievementsSection = document.querySelector("#achievements .container")
-
-  // Remove existing testimonials, caseStudies, and achievements-grid if they exist
-  const existingTestimonials = achievementsSection.querySelector(".testimonials-section")
-  if (existingTestimonials) existingTestimonials.remove()
-
-  const existingCaseStudies = achievementsSection.querySelector(".case-studies-section")
-  if (existingCaseStudies) existingCaseStudies.remove()
-
-  const existingGrid = achievementsSection.querySelector(".achievements-grid")
-  if (existingGrid) existingGrid.remove()
-
-  // Render Testimonials
-  if (achievementsData.testimonials && achievementsData.testimonials.length > 0) {
-    const testimonialsSection = createElement("div", { classes: ["testimonials-section"] })
-    const testimonialsTitle = createElement("h3", { classes: ["section-subtitle"], text: "" })
-    testimonialsSection.appendChild(testimonialsTitle)
-
-    const testimonialsGrid = createElement("div", { classes: ["testimonials-grid"] })
-    achievementsData.testimonials.forEach((testimonial) => {
-      const testimonialCard = createElement("div", { classes: ["testimonial-card"] })
-
-      if (testimonial.image) {
-        const img = createElement("img", { attrs: { src: testimonial.image, alt: testimonial.name } })
-        testimonialCard.appendChild(img)
-      }
-
-      const testimonialContent = createElement("div", { classes: ["testimonial-content"] })
-      const nameP = createElement("p", { classes: ["testimonial-name"], text: testimonial.name })
-      const contentP = createElement("p", { classes: ["testimonial-text"], text: testimonial.content })
-
-      testimonialContent.appendChild(nameP)
-      testimonialContent.appendChild(contentP)
-      testimonialCard.appendChild(testimonialContent)
-      testimonialsGrid.appendChild(testimonialCard)
-    })
-
-    testimonialsSection.appendChild(testimonialsGrid)
-    achievementsSection.appendChild(testimonialsSection)
-  }
-
-  // Render Case Studies
-  if (achievementsData.caseStudies && achievementsData.caseStudies.length > 0) {
-    const caseStudiesSection = createElement("div", { classes: ["case-studies-section"] })
-    const caseStudiesTitle = createElement("h3", { classes: ["section-subtitle"], text: "" })
-    caseStudiesSection.appendChild(caseStudiesTitle)
-
-    const caseStudiesGrid = createElement("div", { classes: ["case-studies-grid"] })
-    achievementsData.caseStudies.forEach((caseStudy) => {
-      const caseStudyCard = createElement("div", { classes: ["case-study-card"] })
-
-      if (caseStudy.image) {
-        const img = createElement("img", { attrs: { src: caseStudy.image, alt: caseStudy.name } })
-        caseStudyCard.appendChild(img)
-      }
-
-      const caseStudyContent = createElement("div", { classes: ["case-study-content"] })
-      const nameH4 = createElement("h4", { text: caseStudy.name })
-      const ageJobP = createElement("p", { text: `${caseStudy.age} tuổi, ${caseStudy.job}` })
-      const goalP = createElement("p", { classes: ["goal"], text: `Mục tiêu: ${caseStudy.goal}` })
-      const methodP = createElement("p", { classes: ["method"], text: `Phương pháp: ${caseStudy.method}` })
-      const resultP = createElement("p", { classes: ["result"], text: `Kết quả: ${caseStudy.result}` })
-
-      const badgeDiv = createElement("div", { classes: ["case-study-badge", caseStudy.badge] })
-      badgeDiv.innerHTML = caseStudy.badge === "gold" ? "🏆" : "🥈"
-      const badgeScore = createElement("span", { classes: ["badge-score"], text: caseStudy.score })
-      badgeDiv.appendChild(badgeScore)
-
-      caseStudyContent.appendChild(nameH4)
-      caseStudyContent.appendChild(ageJobP)
-      caseStudyContent.appendChild(goalP)
-      caseStudyContent.appendChild(methodP)
-      caseStudyContent.appendChild(resultP)
-      caseStudyContent.appendChild(badgeDiv)
-      caseStudyCard.appendChild(caseStudyContent)
-      caseStudiesGrid.appendChild(caseStudyCard)
-    })
-
-    caseStudiesSection.appendChild(caseStudiesGrid)
-    achievementsSection.appendChild(caseStudiesSection)
-  }
-
-
-}
 
 // Render Contact Section
 function renderContact(contactData) {
@@ -520,16 +459,16 @@ function renderContact(contactData) {
   })
 
   // Contact details
-  const hotlineLink = document.querySelector(".detail-value[href^='tel:']")
-  hotlineLink.textContent = contactData.details.hotline
-  hotlineLink.setAttribute("href", `tel:${contactData.details.hotline.replace(/-/g, "")}`)
+  // const hotlineLink = document.querySelector(".detail-value[href^='tel:']")
+  // hotlineLink.textContent = contactData.details.hotline
+  // hotlineLink.setAttribute("href", `tel:${contactData.details.hotline.replace(/-/g, "")}`)
 
-  const emailLink = document.querySelector(".detail-value[href^='mailto:']")
-  emailLink.textContent = contactData.details.email
-  emailLink.setAttribute("href", `mailto:${contactData.details.email}`)
+  // const emailLink = document.querySelector(".detail-value[href^='mailto:']")
+  // emailLink.textContent = contactData.details.email
+  // emailLink.setAttribute("href", `mailto:${contactData.details.email}`)
 
-  const addressText = document.querySelector(".detail-value:not(a)")
-  addressText.textContent = contactData.details.address
+  // const addressText = document.querySelector(".detail-value:not(a)")
+  // addressText.textContent = contactData.details.address
 
   // Form button and note
   const submitBtnSpan = document.querySelector(".contact-form button span")
@@ -616,13 +555,11 @@ async function renderAll() {
 
   // After loading components, render dynamic data
   renderNav(window.data.nav)
-  renderHero(window.data.hero)
+  // renderHero(window.data.hero)
   renderAbout(window.data.about)
   renderReasons(window.data.reasons)
   renderDealsMiddle(window.data.deals)
   renderCourses(window.data.courses)
-  renderTeachers(window.data.teachers)
-  renderAchievements(window.data.achievements)
   renderContact(window.data.contact)
 }
 
@@ -679,3 +616,4 @@ function initAboutSlider() {
         prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
     }
 }
+

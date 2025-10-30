@@ -1,51 +1,7 @@
-// Mobile Menu Toggle
-const menuToggle = document.querySelector(".menu-toggle")
-const navMenu = document.querySelector(".nav-menu")
+
 const body = document.body
 
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("active")
-    menuToggle.classList.toggle("active")
 
-    // Prevent body scroll when menu is open
-    if (navMenu.classList.contains("active")) {
-      body.style.overflow = "hidden"
-    } else {
-      body.style.overflow = ""
-    }
-  })
-
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".main-nav") && navMenu.classList.contains("active")) {
-      navMenu.classList.remove("active")
-      menuToggle.classList.remove("active")
-      body.style.overflow = ""
-    }
-  })
-
-  // Close menu when clicking on a link
-  navMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("active")
-      menuToggle.classList.remove("active")
-      body.style.overflow = ""
-    })
-  })
-}
-
-// Mobile Submenu Toggle
-const menuItems = document.querySelectorAll(".menu-item.has-submenu > a")
-menuItems.forEach((item) => {
-  item.addEventListener("click", (e) => {
-    if (window.innerWidth <= 768) {
-      e.preventDefault()
-      const parent = item.parentElement
-      parent.classList.toggle("active")
-    }
-  })
-})
 
 // Back to Top Button
 const backToTop = document.getElementById("backToTop")
